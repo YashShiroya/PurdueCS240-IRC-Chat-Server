@@ -60,6 +60,9 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 bool HashTableVoid::find( const char * key, void ** data)
 {
 	// Add implementation here
+
+	
+
 	return false;
 }
 
