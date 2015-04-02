@@ -200,3 +200,9 @@ After doing this, you may fix the identity used for this commit with:
  6 files changed, 28 insertions(+), 19 deletions(-)
  rewrite HashTableVoidTest (60%)
  create mode 100644 IRCServer.c
+[master bd9d7b5] Make IRCServer
+ 5 files changed, 4 insertions(+), 5 deletions(-)
+ delete mode 100644 diff.out
+ delete mode 100644 prog.org.out
+ delete mode 100644 prog.out
+ delete mode 100644 total.out
