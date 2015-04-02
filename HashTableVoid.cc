@@ -63,7 +63,7 @@ bool HashTableVoid::find( const char * key, void ** data)
 	int h = hash(key);
 	HashTableVoidEntry * he = _buckets[h];
 	while(he != NULL) {
-		if(strcmp(he->_key, key) != 0) {
+		if(!strcmp(he->_key, key)) {
 			he -> _data  = data;
 			return true;
 		} 
