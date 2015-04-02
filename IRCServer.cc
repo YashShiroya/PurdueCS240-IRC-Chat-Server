@@ -34,8 +34,7 @@ const char * usage =
 
 int QueueLength = 5;
 
-int
-IRCServer::open_server_socket(int port) {
+int IRCServer::open_server_socket(int port) {
 
 	// Set the IP address and port for this server
 	struct sockaddr_in serverIPAddress; 
@@ -77,8 +76,7 @@ IRCServer::open_server_socket(int port) {
 	return masterSocket;
 }
 
-void
-IRCServer::runServer(int port)
+void IRCServer::runServer(int port)
 {
 	int masterSocket = open_server_socket(port);
 
@@ -167,8 +165,7 @@ main( int argc, char ** argv )
 //            \r\n
 //
 
-void
-IRCServer::processRequest( int fd )
+void IRCServer::processRequest( int fd )
 {
 	// Buffer used to store the comand received from the client
 	const int MaxCommandLine = 1024;
