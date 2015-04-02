@@ -10,7 +10,7 @@ int HashTableVoid::hash(const char * key)
 	// Add implementation here
 	int h = 0;
 	const char * p = key;
-	while (*p != '\0') {
+	while (*p) {
 		h += *p;
 		p++;
 	}
