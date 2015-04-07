@@ -32,7 +32,7 @@ HashTableVoid::HashTableVoid()
 bool HashTableVoid::insertItem( const char * key, void * data)
 {
 	// Add implementation here
-		
+/*		
 	int h = hash(key);
 	HashTableVoidEntry * e = _buckets[h];
 	
@@ -53,7 +53,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 	_buckets[h] = e;
 
 	return false;
-}
+*/}
 
 // Find a key in the dictionary and place in "data" the corresponding record
 // Returns false if key is does not exist
