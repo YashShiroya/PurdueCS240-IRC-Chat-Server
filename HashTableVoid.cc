@@ -1,4 +1,4 @@
-
+#include <stdbool.h>
 //
 // Implementation of a HashTable that stores void *
 //
@@ -32,12 +32,12 @@ HashTableVoid::HashTableVoid()
 bool HashTableVoid::insertItem( const char * key, void * data)
 {
 	// Add implementation here
-/*		
+
 	int h = hash(key);
 	HashTableVoidEntry * e = _buckets[h];
-	
+
 	while (e!=NULL) {
-		if (!strcmp(e->_key, key)) {
+		if (!strcmp(e-> _key, key)) {
 			// Entry found
 			e->_data = data;
 			return true;
@@ -45,7 +45,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 		e = e->_next;
 	}
 	//Add new
-	
+
 	e = new HashTableVoidEntry;
 	e->_key = strdup(key);
 	e->_data = data;
@@ -53,7 +53,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 	_buckets[h] = e;
 
 	return false;
-*/}
+}
 
 // Find a key in the dictionary and place in "data" the corresponding record
 // Returns false if key is does not exist
@@ -76,7 +76,25 @@ bool HashTableVoid::find( const char * key, void ** data)
 // Removes an element in the hash table. Return false if key does not exist.
 bool HashTableVoid::removeElement(const char * key)
 {
-	// Add implementation here
+	int h = hash(key);
+	HashTableVoidEntry * e = _buckets[h];
+	HashTableVoidEntry * prev = NULL;
+	while (e!=NULL) {
+		if (!strcmp(e->_key, key)) {
+			// Entry found
+			if (prev != NULL) {
+				prev->_next = e->_next;
+			}
+			else {
+				_buckets[h] = e->_next;
+			}
+			free((char *)e->_key);
+			delete e;
+			return true;
+		}
+		prev = e;
+		e = e->_next;
+	}
 	return false;
 }
 
@@ -84,6 +102,7 @@ bool HashTableVoid::removeElement(const char * key)
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 {
 	// Add implementation here
+
 
 }
 
