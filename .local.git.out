@@ -462,3 +462,6 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+)
 [master 76e52a0] Make IRCServer
  3 files changed, 4 insertions(+), 2 deletions(-)
+[master 95efb28] Make IRCServer
+ 4 files changed, 13 insertions(+), 2 deletions(-)
+ rename .HashTableVoid.cc.swp => .HashTableVoid.cc.swo (100%)
