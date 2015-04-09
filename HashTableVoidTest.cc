@@ -133,6 +133,7 @@ void test4()
   const char * key;
   int grade;
   void * gradev;
+  printf("YOLO\n");
   while (iterator.next(key, gradev)) {
     grade = (long)gradev;
     sum+=grade;
