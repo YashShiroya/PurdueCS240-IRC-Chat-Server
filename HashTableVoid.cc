@@ -104,6 +104,7 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 {
 	// Add implementation here
 	_currentBucket = 0;
+
 	_hashTable = hashTable;
 	while(_currentBucket < _hashTable->TableSize){
 		if(_hashTable->_buckets[_currentBucket] != NULL) break;
@@ -118,6 +119,7 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
 	// Add implementation hiere
+	//
 	if(_currentBucket < _hashTable->TableSize) {
 
 
@@ -130,15 +132,23 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		//replace with else
 
 		if(_currentEntry == NULL) {
+			_currentBucket++;
 			//printf("1\n");
 			//printf("current %d, TableSize %d\n", _currentBucket,_hashTable->TableSize);
 			while(_currentBucket < _hashTable->TableSize){
 				if(_hashTable->_buckets[_currentBucket] != NULL) break;
 				_currentBucket++;
 			}
+			//printf("1\n");
+			_currentEntry = _hashTable->_buckets[_currentBucket];
 			if(_currentEntry != NULL) {
-				key = _currentEntry->_key;
-				data = _currentEntry->_data;
+				//printf("2\n");
+
+				if(_currentEntry != NULL) {
+					key = _currentEntry->_key;
+					data = _currentEntry->_data;
+				}
+				
 				_currentEntry = _currentEntry->_next;
 				return true;
 			}
@@ -146,9 +156,8 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		}
 
 	}
-	else {
 	
-	//if (_currentBucket == _hashTable->TableSize - 1  && (_hashTable->_buckets[_currentBucket] == NULL)) {
 		return false;
-	}
+
 }
+
