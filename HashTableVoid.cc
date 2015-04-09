@@ -116,7 +116,7 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
 	// Add implementation here
-	if(_currentEntry != NULL) {
+	if(_currentEntry->_next != NULL) {
 		key = _currentEntry->_key;
 		data = _currentEntry->_data;
 		_currentEntry = _currentEntry->_next;
@@ -130,4 +130,5 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 	}
 	return false;
 }
+
 

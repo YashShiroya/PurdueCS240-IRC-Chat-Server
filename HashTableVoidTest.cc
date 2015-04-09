@@ -119,7 +119,7 @@ void test4()
 
   bool e;
   e = h.insertItem("Rachael", (void*) 8);	
- assert(e);
+ assert(!e);
   
   /*e = h.insertItem("Monica", (void*) 9);
   assert(!e);
