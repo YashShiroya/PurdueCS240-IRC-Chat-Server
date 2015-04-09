@@ -118,8 +118,8 @@ void test4()
   HashTableVoid h;
 
   bool e;
-  e = h.insertItem("Rachael", (void*) 8);
-  assert(!e);
+  e = h.insertItem("Rachael", (void*) 8);	
+ assert(!e);
   
   /*e = h.insertItem("Monica", (void*) 9);
   assert(!e);
@@ -138,7 +138,7 @@ void test4()
     sum+=grade;
   //  printf("%s %d\n", key, grade);
   }
-
+printf("my_sum %i",sum);
   assert(sum==18);
 
   //printf("Test4 passed\n");
