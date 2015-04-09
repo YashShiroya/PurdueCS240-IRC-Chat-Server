@@ -119,7 +119,7 @@ void test4()
 
   bool e;
   e = h.insertItem("Rachael", (void*) 8);	
- //assert(!e);
+assert(!e);
   
   e = h.insertItem("Monica", (void*) 9);
   assert(!e);
@@ -137,11 +137,9 @@ void test4()
   //printf("2\n");
   int i = 0;
   while (iterator.next(key, gradev)) {
-    i++;
-    printf("ran %d times\n",i);
     grade = (long)gradev;
     sum+=grade;
-    printf("%s %d\n", key, grade);
+    //printf("%s %d\n", key, grade);
   }
 printf("my_sum %i",sum);
   assert(sum==18);
