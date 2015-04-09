@@ -136,7 +136,7 @@ void test4()
   while (iterator.next(key, gradev)) {
     grade = (long)gradev;
     sum+=grade;
-    //printf("%s %d\n", key, grade);
+    printf("%s %d\n", key, grade);
   }
 
   assert(sum==18);
