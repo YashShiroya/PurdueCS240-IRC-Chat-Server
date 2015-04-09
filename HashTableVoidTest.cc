@@ -141,7 +141,7 @@ assert(!e);
     sum+=grade;
     //printf("%s %d\n", key, grade);
   }
-printf("my_sum %i",sum);
+//printf("my_sum %i",sum);
   assert(sum==18);
 
   printf("Test4 passed\n");
