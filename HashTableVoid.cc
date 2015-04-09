@@ -144,10 +144,10 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 			if(_currentEntry != NULL) {
 				//printf("2\n");
 
-				if(_currentEntry != NULL) {
+				//if(_currentEntry != NULL) {
 					key = _currentEntry->_key;
 					data = _currentEntry->_data;
-				}
+				//}
 				
 				_currentEntry = _currentEntry->_next;
 				return true;
