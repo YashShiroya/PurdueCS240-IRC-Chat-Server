@@ -102,6 +102,12 @@ bool HashTableVoid::removeElement(const char * key)
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 {
 	// Add implementation here
+	_currentBucket = 0;
+	_hashTable = hashTable;
+	while((_hashTable->_buckets[_currentBucket] == NULL) && (_currentBucket < _hashTable->TableSize)){
+		_currentBucket++;
+	}
+	_currentEntry = _hashTable->_buckets[_currentBucket];
 
 
 }
@@ -110,6 +116,17 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
 	// Add implementation here
+	if(_currentEntry->_next != NULL) {
+		key = _currentEntry->_key;
+		data = _currentEntry->_data;
+		_currentEntry = _currentEntry->_next;
+	}
+	else {
+		while((_hashTable->_buckets[_currentBucket] == NULL) && (_currentBucket < _hashTable->TableSize)){
+			_currentBucket++;
+		}
+
+	}
 	return false;
 }
 

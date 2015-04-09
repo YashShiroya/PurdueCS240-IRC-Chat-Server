@@ -37,7 +37,7 @@ class HashTableVoid {
   // Returns false if key is does not exist
   bool find( const char * key, void ** data);
 
-  // Removes an element in the hash table. Return false if key does not exist.
+  // Removes an element in the hash table. Return false if key does not exst.
   bool removeElement(const char * key);
 };
 
