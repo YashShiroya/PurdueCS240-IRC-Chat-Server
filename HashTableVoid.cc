@@ -124,10 +124,19 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		return true;
 	}
 	else {
+
 		while((_hashTable->_buckets[_currentBucket] == NULL) && (_currentBucket < _hashTable->TableSize)){
 			printf("%d < %d\n", _currentBucket, _hashTable->TableSize);
-			_currentBucket++;
-		}
+			_currentBucket++;			
+			}
+
+		
+
+		key = _currentEntry->_key;
+		data = _currentEntry->_data;
+		_currentEntry = _currentEntry->_next;
+		return true;
+
 
 	}
 
