@@ -124,8 +124,9 @@ void test4()
   e = h.insertItem("Monica", (void*) 9);
   assert(!e);
   
-  e = h.insertItem("Monica", (void*) 10);
+ e = h.insertItem("Monica", (void*) 10);
   assert(e);
+ 
  //printf("1\n");
   HashTableVoidIterator iterator(&h);
 
@@ -134,12 +135,15 @@ void test4()
   int grade;
   void * gradev;
   //printf("2\n");
+  int i = 0;
   while (iterator.next(key, gradev)) {
+    i++;
+    printf("ran %d times\n",i);
     grade = (long)gradev;
     sum+=grade;
   //  printf("%s %d\n", key, grade);
   }
-//printf("my_sum %i",sum);
+printf("my_sum %i",sum);
   assert(sum==18);
 
   printf("Test4 passed\n");

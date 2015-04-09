@@ -119,34 +119,36 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
 	// Add implementation hiere
 	if(_currentBucket < _hashTable->TableSize) {
-	
 
-	if(_currentEntry != NULL) {
-		key = _currentEntry->_key;
-		data = _currentEntry->_data;
-		_currentEntry = _currentEntry->_next;
-		return true;
-	}
-	//replace with else
-	
-	if(_currentEntry == NULL) {
-		printf("1\n");
-		//printf("current %d, TableSize %d\n", _currentBucket,_hashTable->TableSize);
-		while(_currentBucket < _hashTable->TableSize){
-			if(_hashTable->_buckets[_currentBucket] != NULL) break;
-			_currentBucket++;
-		}
+
 		if(_currentEntry != NULL) {
 			key = _currentEntry->_key;
 			data = _currentEntry->_data;
 			_currentEntry = _currentEntry->_next;
 			return true;
 		}
-		
+		//replace with else
+
+		if(_currentEntry == NULL) {
+			//printf("1\n");
+			//printf("current %d, TableSize %d\n", _currentBucket,_hashTable->TableSize);
+			while(_currentBucket < _hashTable->TableSize){
+				if(_hashTable->_buckets[_currentBucket] != NULL) break;
+				_currentBucket++;
+			}
+			if(_currentEntry != NULL) {
+				key = _currentEntry->_key;
+				data = _currentEntry->_data;
+				_currentEntry = _currentEntry->_next;
+				return true;
+			}
+
+		}
+
 	}
-
-}
-
-return false;
-
+	else {
+	
+	//if (_currentBucket == _hashTable->TableSize - 1  && (_hashTable->_buckets[_currentBucket] == NULL)) {
+		return false;
+	}
 }
