@@ -127,11 +127,11 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		}
 
 	}
-	return true;
 
 	if(_currentBucket == _hashTable->TableSize - 1) {
 		return false;
 	}
+	else {return true;}
 }
 
 
