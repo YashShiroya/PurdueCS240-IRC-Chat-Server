@@ -126,14 +126,14 @@ void test4()
   
   e = h.insertItem("Monica", (void*) 10);
   assert(e);
- printf("1\n");
+ //printf("1\n");
   HashTableVoidIterator iterator(&h);
 
   int sum=0;
   const char * key;
   int grade;
   void * gradev;
-  printf("2\n");
+  //printf("2\n");
   while (iterator.next(key, gradev)) {
     grade = (long)gradev;
     sum+=grade;
