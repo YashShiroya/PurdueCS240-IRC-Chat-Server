@@ -578,3 +578,9 @@ After doing this, you may fix the identity used for this commit with:
  delete mode 100644 prog.org.out
  delete mode 100644 prog.out
  delete mode 100644 total.out
+[master 227c454] 10 of 12
+ 7 files changed, 13 insertions(+), 1 deletion(-)
+ create mode 100644 diff.out
+ create mode 100644 prog.org.out
+ create mode 100644 prog.out
+ create mode 100644 total.out

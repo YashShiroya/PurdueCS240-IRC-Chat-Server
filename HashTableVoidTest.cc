@@ -172,7 +172,7 @@ void test5()
   }
 
   assert(sum2==sum);
-  //printf("Test5 passed\n");
+  printf("Test5 passed\n");
 }
 
 void test6()
