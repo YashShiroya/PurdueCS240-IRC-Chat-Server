@@ -216,9 +216,9 @@ void IRCServer::processRequest( int fd )
 	char * password = "a";            //Removed CONST________________________________________
 	char * args  = "a";
 
-	extract_from_CommandLine(commandLine,command,user,password);
+	//extract_from_CommandLine(commandLine,command,user,password);
 
-	/*int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
+	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
 	
 	while((a = commandLine[i]) != '\0') {
 		if(a == ' ') {
@@ -246,7 +246,7 @@ void IRCServer::processRequest( int fd )
 		}
 	}
 
-*/
+
 	printf("command=%s\n", command);
 	printf("user=%s\n", user);
 	printf( "password=%s\n", password );
@@ -286,7 +286,7 @@ void IRCServer::processRequest( int fd )
 }
 //My Functions____________________________
 
-void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd) {
+/*void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd) {
 	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
 	while((a = cmdLine[i]) != '\0') {
 		if(a == ' ') {
@@ -315,7 +315,7 @@ void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &
 		}
 	}
 }
-
+*/
 //Given Functions_________________________
 	void
 IRCServer::initialize()
