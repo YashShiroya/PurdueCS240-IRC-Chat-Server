@@ -31,7 +31,7 @@ const char * usage =
 #include <time.h>
 
 #include "IRCServer.h"
-
+#include "HashTableVoid.h"
 int QueueLength = 5;
 void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
