@@ -33,7 +33,7 @@ const char * usage =
 #include "IRCServer.h"
 
 int QueueLength = 5;
-void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd, char * &  argz);
+void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
 
 	// Set the IP address and port for this server
@@ -211,10 +211,41 @@ void IRCServer::processRequest( int fd )
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
 
-	const char * command = "ADD-USER";
-	const char * user = "peter";
-	const char * password = "spider";
-	const char * args = "";
+	 char * command;
+	const char * user;
+	const char * password;            //Removed CONST________________________________________
+	const char * args;
+
+	//extract_from_CommandLine(commandLine,command,user,password);
+
+	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
+	
+	while((a = commandLine[i]) != '\0') {
+		if(a == ' ') {
+			space_encountered++;
+			temp[j] = '\0';
+			j = 0;
+			if(space_encountered == 1) {
+				command = temp;
+			}
+			else if(space_encountered == 2) {
+				user = temp;
+			}
+			else if(space_encountered == 3) {
+				password = temp;
+			}
+
+		}
+		if(a != ' ') {
+			if(space_encountered == 0) {
+				command[j++] = a;
+			}
+			else {
+				temp[j++] = a;
+			}
+		}
+	}
+
 
 	printf("command=%s\n", command);
 	printf("user=%s\n", user);
@@ -255,7 +286,7 @@ void IRCServer::processRequest( int fd )
 }
 //My Functions____________________________
 
-void extract_from_CommandLine(char cmdLine[],char * &  cmd, char * &  usr, char * &  pswrd, char * &  argz) {
+/*void IRCServer::extract_from_CommandLine(char cmdLine[], const char * &  cmd, const char * &  usr, const char * &  pswrd) {
 	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
 	while((a = cmdLine[i]) != '\0') {
 		if(a == ' ') {
@@ -283,7 +314,7 @@ void extract_from_CommandLine(char cmdLine[],char * &  cmd, char * &  usr, char 
 		}
 	}
 }
-
+*/
 //Given Functions_________________________
 	void
 IRCServer::initialize()
