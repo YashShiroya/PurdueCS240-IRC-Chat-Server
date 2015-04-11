@@ -212,36 +212,27 @@ void IRCServer::processRequest( int fd )
 	printf("For now, command, user, and password are hardwired.\n");
 
 	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20] = "aa"; int j = 0;
-	char * cmd = (char*)malloc(sizeof(char) * 20);
-	char * usr = (char*)malloc(sizeof(char) * 20); 
-	char * pswrd = (char*)malloc(sizeof(char) * 20);
-	char * argz = (char*)malloc(sizeof(char) * 20);
+	char cmd[20]; char usr[20]; char pswrd[20]; char argz[20];
 	
 	while((a = commandLine[i]) != '\0') {
-		printf("1");
-		if(space_encountered == 0) {
-			strcpy(cmd,temp);
-		}
-		printf("2");
-		if(a == ' ') {
-			printf("y");
+
+		if(a == ' ') { 
 			space_encountered++;
-			temp[j] = '\0';
-			j = 0;			
-			if(space_encountered == 1) {
-				strcpy(usr,temp);
-			}			
-			else if(space_encountered == 2) {
-				strcpy(pswrd,temp);
-			}
-			else if(space_encountered == 3) {
-				strcpy(argz,temp);
-			}
+			j = 0;
+		}	
+		if(space_encountered == 0) {
+			cmd[j++] = a; cmd[j] = 0;
 		}
-		if(a != ' ') {
-			temp[j++] = a;
-			temp[j] = '\n';
+		else if(space_encountered == 1) {
+			usr[j++] = a; usr[j] = 0;
 		}
+		else if(space_encountered == 2) {
+			pswrd[j++] = a; pswrd[j] = 0;
+		}
+		else if(space_encountered == 3) {
+			argz[j++] = a; argz[j] = 0;
+		}
+		
 		i++;
 	}
 
