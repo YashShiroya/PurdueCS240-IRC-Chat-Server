@@ -221,6 +221,7 @@ void IRCServer::processRequest( int fd )
 		}
 		printf("2");
 		if(a == ' ') {
+			printf("y");
 			space_encountered++;
 			temp[j] = '\0';
 			j = 0;			
