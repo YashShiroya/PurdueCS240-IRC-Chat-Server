@@ -238,6 +238,7 @@ void IRCServer::processRequest( int fd )
 			temp[j++] = a;
 			temp[j] = '\n';
 		}
+		i++;
 	}
 
 	const char * command = cmd;
