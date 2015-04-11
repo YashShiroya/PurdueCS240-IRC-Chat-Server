@@ -211,41 +211,37 @@ void IRCServer::processRequest( int fd )
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
 
-	const char * command;
-	const char * user;
-	const char * password;            //Removed CONST________________________________________
-	const char * args;
-
-	//extract_from_CommandLine(commandLine,command,user,password);
-
 	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20] = "aa"; int j = 0;
+	char * cmd = "a"; char * usr = "a"; char * pswrd = "a"; char * argz = "a";
 	
 	while((a = commandLine[i]) != '\0') {
-		
 		if(space_encountered == 0) {
-			command = temp;
+			cmd = temp;
 		}
-		
 		if(a == ' ') {
-
 			space_encountered++;
 			temp[j] = '\0';
-			j = 0;
-			
+			j = 0;			
 			if(space_encountered == 1) {
-				user = temp;
+				usr = temp;
+			}			
+			else if(space_encountered == 2) {
+				pswrd = temp;
 			}
-			
-			else if(space_encountered == 1) {
-				password = temp;
+			else if(space_encountered == 3) {
+				argz = temp;
 			}
-
 		}
 		if(a != ' ') {
 			temp[j++] = a;
 			temp[j] = '\n';
 		}
 	}
+
+	const char * command = cmd;
+	const char * user = usr;
+	const char * password = pswrd;           //Removed CONST________________________________________
+	const char * args = argz;
 
 
 	printf("command=%s\n", command);
@@ -288,33 +284,33 @@ void IRCServer::processRequest( int fd )
 //My Functions____________________________
 
 /*void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd) {
-	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
-	while((a = cmdLine[i]) != '\0') {
-		if(a == ' ') {
-	//	print
-			space_encountered++;
-			temp[j] = '\0';
-			j = 0;
-			if(space_encountered == 1) {
-				cmd = temp;
-			}
-			else if(space_encountered == 2) {
-				usr = temp;
-			}
-			else if(space_encountered == 3) {
-				pswrd = temp;
-			}
+  int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
+  while((a = cmdLine[i]) != '\0') {
+  if(a == ' ') {
+//	print
+space_encountered++;
+temp[j] = '\0';
+j = 0;
+if(space_encountered == 1) {
+cmd = temp;
+}
+else if(space_encountered == 2) {
+usr = temp;
+}
+else if(space_encountered == 3) {
+pswrd = temp;
+}
 
-		}
-		if(a != ' ') {
-			if(space_encountered == 0) {
-				cmd[j++] = a;
-			}
-			else {
-				temp[j++] = a;
-			}
-		}
-	}
+}
+if(a != ' ') {
+if(space_encountered == 0) {
+cmd[j++] = a;
+}
+else {
+temp[j++] = a;
+}
+}
+}
 }
 */
 //Given Functions_________________________
