@@ -32,8 +32,9 @@ const char * usage =
 
 #include "IRCServer.h"
 #include "HashTableVoid.h"
+
 int QueueLength = 5;
-void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
+//void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
 
 	// Set the IP address and port for this server
@@ -211,9 +212,9 @@ void IRCServer::processRequest( int fd )
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
 
-	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20] = "aa"; int j = 0;
+	int a = 'a'; int i = 0; int space_encountered = 0; int j = 0;
 	char cmd[20]; char usr[20]; char pswrd[20]; char argz[20];
-	
+
 	while((a = commandLine[i]) != '\0') {
 
 		if(a == ' ') { 
@@ -232,7 +233,7 @@ void IRCServer::processRequest( int fd )
 		else if(space_encountered == 3) {
 			argz[j++] = a; argz[j] = 0;
 		}
-		
+
 		i++;
 	}
 
@@ -280,37 +281,6 @@ void IRCServer::processRequest( int fd )
 	close(fd);	
 }
 //My Functions____________________________
-
-/*void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd) {
-  int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
-  while((a = cmdLine[i]) != '\0') {
-  if(a == ' ') {
-//	print
-space_encountered++;
-temp[j] = '\0';
-j = 0;
-if(space_encountered == 1) {
-cmd = temp;
-}
-else if(space_encountered == 2) {
-usr = temp;
-}
-else if(space_encountered == 3) {
-pswrd = temp;
-}
-
-}
-if(a != ' ') {
-if(space_encountered == 0) {
-cmd[j++] = a;
-}
-else {
-temp[j++] = a;
-}
-}
-}
-}
-*/
 //Given Functions_________________________
 	void
 IRCServer::initialize()
@@ -323,28 +293,31 @@ IRCServer::initialize()
 
 }
 
+struct product {
+	int weight;
+	double price;
+} ;
+
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password
 	return true;
 }
 
-	void
-IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
+void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-	// Here add a new user. For now always return OK.
+
 
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
-	return;		
+	return;
 }
 
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
 }
-
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 {
