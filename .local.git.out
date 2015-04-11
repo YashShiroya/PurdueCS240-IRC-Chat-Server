@@ -647,3 +647,6 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100644 prog.org.out
  create mode 100644 prog.out
  create mode 100644 total.out
+[master 36e1974] Make IRCServer
+ 5 files changed, 12 insertions(+), 1 deletion(-)
+ create mode 100644 .IRCServer.cc.swp

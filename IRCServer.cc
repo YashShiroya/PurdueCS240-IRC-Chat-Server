@@ -33,7 +33,7 @@ const char * usage =
 #include "IRCServer.h"
 
 int QueueLength = 5;
-
+void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd, char * &  argz);
 int IRCServer::open_server_socket(int port) {
 
 	// Set the IP address and port for this server
@@ -42,7 +42,7 @@ int IRCServer::open_server_socket(int port) {
 	serverIPAddress.sin_family = AF_INET;
 	serverIPAddress.sin_addr.s_addr = INADDR_ANY;
 	serverIPAddress.sin_port = htons((u_short) port);
-  
+
 	// Allocate a socket
 	int masterSocket =  socket(PF_INET, SOCK_STREAM, 0);
 	if ( masterSocket < 0) {
@@ -54,17 +54,17 @@ int IRCServer::open_server_socket(int port) {
 	// have to wait about 2 minutes before reusing the sae port number
 	int optval = 1; 
 	int err = setsockopt(masterSocket, SOL_SOCKET, SO_REUSEADDR, 
-			     (char *) &optval, sizeof( int ) );
-	
+			(char *) &optval, sizeof( int ) );
+
 	// Bind the socket to the IP address and port
 	int error = bind( masterSocket,
-			  (struct sockaddr *)&serverIPAddress,
-			  sizeof(serverIPAddress) );
+			(struct sockaddr *)&serverIPAddress,
+			sizeof(serverIPAddress) );
 	if ( error ) {
 		perror("bind");
 		exit( -1 );
 	}
-	
+
 	// Put socket in listening mode and set the 
 	// size of the queue of unprocessed connections
 	error = listen( masterSocket, QueueLength);
@@ -81,27 +81,27 @@ void IRCServer::runServer(int port)
 	int masterSocket = open_server_socket(port);
 
 	initialize();
-	
+
 	while ( 1 ) {
-		
+
 		// Accept incoming connections
 		struct sockaddr_in clientIPAddress;
 		int alen = sizeof( clientIPAddress );
 		int slaveSocket = accept( masterSocket,
-					  (struct sockaddr *)&clientIPAddress,
-					  (socklen_t*)&alen);
-		
+				(struct sockaddr *)&clientIPAddress,
+				(socklen_t*)&alen);
+
 		if ( slaveSocket < 0 ) {
 			perror( "accept" );
 			exit( -1 );
 		}
-		
+
 		// Process request.
 		processRequest( slaveSocket );		
 	}
 }
 
-int
+	int
 main( int argc, char ** argv )
 {
 	// Print usage if not enough arguments
@@ -109,7 +109,7 @@ main( int argc, char ** argv )
 		fprintf( stderr, "%s", usage );
 		exit( -1 );
 	}
-	
+
 	// Get the port from the arguments
 	int port = atoi( argv[1] );
 
@@ -117,7 +117,7 @@ main( int argc, char ** argv )
 
 	// It will never return
 	ircServer.runServer(port);
-	
+
 }
 
 //
@@ -174,11 +174,11 @@ void IRCServer::processRequest( int fd )
 	char commandLine[ MaxCommandLine + 1 ];
 	int commandLineLength = 0;
 	int n;
-	
+
 	// Currently character read
 	unsigned char prevChar = 0;
 	unsigned char newChar = 0;
-	
+
 	//
 	// The client should send COMMAND-LINE\n
 	// Read the name of the client character by character until a
@@ -187,22 +187,22 @@ void IRCServer::processRequest( int fd )
 
 	// Read character by character until a \n is found or the command string is full.
 	while ( commandLineLength < MaxCommandLine &&
-		read( fd, &newChar, 1) > 0 ) {
+			read( fd, &newChar, 1) > 0 ) {
 
 		if (newChar == '\n' && prevChar == '\r') {
 			break;
 		}
-		
+
 		commandLine[ commandLineLength ] = newChar;
 		commandLineLength++;
 
 		prevChar = newChar;
 	}
-	
+
 	// Add null character at the end of the string
 	// Eliminate last \r
 	commandLineLength--;
-        commandLine[ commandLineLength ] = 0;
+	commandLine[ commandLineLength ] = 0;
 
 	printf("RECEIVED: %s\n", commandLine);
 
@@ -253,8 +253,39 @@ void IRCServer::processRequest( int fd )
 
 	close(fd);	
 }
+//My Functions____________________________
 
-void
+void extract_from_CommandLine(char cmdLine[],char * &  cmd, char * &  usr, char * &  pswrd, char * &  argz) {
+	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
+	while((a = cmdLine[i]) != '\0') {
+		if(a == ' ') {
+			space_encountered++;
+			temp[j] = '\0';
+			j = 0;
+			if(space_encountered == 1) {
+				strcpy(cmd,temp);
+			}
+			else if(space_encountered == 2) {
+				strcpy(usr,temp);
+			}
+			else if(space_encountered == 3) {
+				strcpy(pswrd,temp);
+			}
+
+		}
+		if(a != ' ') {
+			if(space_encountered == 0) {
+				cmd[j++] = a;
+			}
+			else {
+				temp[j++] = a;
+			}
+		}
+	}
+}
+
+//Given Functions_________________________
+	void
 IRCServer::initialize()
 {
 	// Open password file
@@ -271,7 +302,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	return true;
 }
 
-void
+	void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	// Here add a new user. For now always return OK.
@@ -282,32 +313,32 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 	return;		
 }
 
-void
+	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
 }
 
-void
+	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 {
 }
 
-void
+	void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
 }
 
-void
+	void
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
 }
 
-void
+	void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
 }
 
-void
+	void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
 
