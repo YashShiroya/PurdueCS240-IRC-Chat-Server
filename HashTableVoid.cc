@@ -106,10 +106,10 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 	_currentBucket = 0;
 
 	_hashTable = hashTable;
-	/*while(_currentBucket < _hashTable->TableSize){
+	while(_currentBucket < _hashTable->TableSize){
 		if(_hashTable->_buckets[_currentBucket] != NULL) break;
 		_currentBucket++;
-	}*/
+	}
 	_currentEntry = _hashTable->_buckets[_currentBucket];
 
 
