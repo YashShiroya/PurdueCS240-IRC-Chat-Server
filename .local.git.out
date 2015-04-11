@@ -658,3 +658,6 @@ After doing this, you may fix the identity used for this commit with:
  5 files changed, 43 insertions(+), 8 deletions(-)
  create mode 100644 .IRCServer.cc.swp
  rewrite IRCServer (88%)
+[master ea2fc55] Make IRCServer
+ 4 files changed, 14 insertions(+), 10 deletions(-)
+ rewrite IRCServer (88%)

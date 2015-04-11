@@ -211,10 +211,10 @@ void IRCServer::processRequest( int fd )
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
 
-	char * command;
-	char * user;
-	char * password;            //Removed CONST________________________________________
-	char * args;
+	char * command = "a";
+	char * user = "a";
+	char * password = "a";            //Removed CONST________________________________________
+	char * args  = "a";
 
 	extract_from_CommandLine(commandLine,command,user,password);
 
@@ -290,17 +290,18 @@ void IRCServer::extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &
 	int a = 'a'; int i = 0; int space_encountered = 0; char temp[20]; int j = 0;
 	while((a = cmdLine[i]) != '\0') {
 		if(a == ' ') {
+	//	print
 			space_encountered++;
 			temp[j] = '\0';
 			j = 0;
 			if(space_encountered == 1) {
-				strcpy(cmd,temp);
+				cmd = temp;
 			}
 			else if(space_encountered == 2) {
-				strcpy(usr,temp);
+				usr = temp;
 			}
 			else if(space_encountered == 3) {
-				strcpy(pswrd,temp);
+				pswrd = temp;
 			}
 
 		}
