@@ -226,13 +226,13 @@ void IRCServer::processRequest( int fd )
 			temp[j] = '\0';
 			j = 0;			
 			if(space_encountered == 1) {
-				usr = temp;
+				strcpy(usr,temp);
 			}			
 			else if(space_encountered == 2) {
-				pswrd = temp;
+				strcpy(pswrd,temp);
 			}
 			else if(space_encountered == 3) {
-				argz = temp;
+				strcpy(argz,temp);
 			}
 		}
 		if(a != ' ') {
