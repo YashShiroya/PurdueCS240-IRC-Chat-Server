@@ -12,6 +12,9 @@ private:
 
 public:
 	void initialize();
+	//My Functions
+	void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd, char * &  argz);
+	//Given Functions
 	bool checkPassword(int fd, const char * user, const char * password);
 	void processRequest( int socket );
 	void addUser(int fd, const char * user, const char * password, const char * args);
