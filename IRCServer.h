@@ -13,7 +13,7 @@ private:
 public:
 	void initialize();
 	//My Functions
-	void extract_from_CommandLine(char cmdLine[], const char * &  cmd, const char * &  usr, const char * &  pswrd);
+	void extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd);
 	//Given Functions
 	bool checkPassword(int fd, const char * user, const char * password);
 	void processRequest( int socket );
