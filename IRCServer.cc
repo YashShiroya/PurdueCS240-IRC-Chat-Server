@@ -217,7 +217,7 @@ void IRCServer::processRequest( int fd )
 	while((a = commandLine[i]) != '\0') {
 		printf("1");
 		if(space_encountered == 0) {
-			cmd = temp;
+			strcpy(cmd,temp);
 		}
 		printf("2");
 		if(a == ' ') {
