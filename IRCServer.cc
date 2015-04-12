@@ -425,14 +425,14 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	strcat(s,"^");
 	strcat(s,password);
 
-	/*while(i < 100) {
+	while(i < 100) {
 		if(strcmp(userpass[i],s) == 0) {
 			char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
 		}
 		i++;
-	}*/
+	}
 	
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
