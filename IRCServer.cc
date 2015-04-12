@@ -401,7 +401,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	int i = 0;
-	file = fopen("userpass.txt","a");
+	file = fopen("password.txt","a");
 
 	printf("user %s, password %s\n",user,password);
 
