@@ -223,18 +223,20 @@ void IRCServer::processRequest( int fd )
 		if(a == ' ') { 
 			space_encountered++;
 			j = 0;
-		}	
-		if(space_encountered == 0) {
-			cmd[j++] = a; cmd[j] = 0;
 		}
-		else if(space_encountered == 1) {
-			usr[j++] = a; usr[j] = 0;
-		}
-		else if(space_encountered == 2) {
-			pswrd[j++] = a; pswrd[j] = 0;
-		}
-		else if(space_encountered == 3) {
-			argz[j++] = a; argz[j] = 0;
+		else {
+			if(space_encountered == 0) {
+				cmd[j++] = a; cmd[j] = 0;
+			}
+			else if(space_encountered == 1) {
+				usr[j++] = a; usr[j] = 0;
+			}
+			else if(space_encountered == 2) {
+				pswrd[j++] = a; pswrd[j] = 0;
+			}
+			else if(space_encountered == 3) {
+				argz[j++] = a; argz[j] = 0;
+			}
 		}
 
 		i++;
@@ -337,7 +339,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 {
 	file = fopen("userpass.txt","w");
 	if(file != NULL) {
-		fprintf(file,"%s^%s",user,password);
+		fprintf(file,"%s^%s\n",user,password);
 	}
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));

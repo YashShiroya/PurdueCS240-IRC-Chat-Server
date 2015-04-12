@@ -697,3 +697,9 @@ After doing this, you may fix the identity used for this commit with:
  delete mode 100644 prog.org.out
  delete mode 100644 prog.out
  delete mode 100644 total.out
+[master 6a2dbbb] Make IRCServer
+ 7 files changed, 61 insertions(+), 9 deletions(-)
+ create mode 100644 .IRCServer.cc.swo
+ delete mode 100644 .IRCServer.cc.swp
+ rewrite IRCServer (87%)
+ create mode 100644 userpass.txt
