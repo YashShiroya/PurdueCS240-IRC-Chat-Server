@@ -513,10 +513,10 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	char * s = (char*)malloc(sizeof(char) * 1000);
 
 	if(checkPassword(fd,user,password) == true) {
-		while(i < number_rooms) {
+		while(i < number_rooms + 1) {
 			strcat(s,rooms[i].room_name);
 			strcat(s,"\r\n");
-			printf("s cat %s\n",s);
+			printf("room name %s\n",rooms[i].room_name);
 			i++;
 		}
 		write(fd,heading,strlen(heading));
