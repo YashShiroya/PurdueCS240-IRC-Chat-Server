@@ -356,7 +356,7 @@ IRCServer::initialize()
 			  users[number_users].s_password = token;
 			  printf("user %s, password %s, user_number %d\n",users[number_users].s_username,users[number_users].s_password,number_users);
 			  number_users++;*/
-			userpass[i] = string;
+			strcpy(userpass[i],string);
 			printf("userpass %s\n",userpass[i]);
 			i++;
 		}
@@ -416,9 +416,9 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("password.txt","a");
 	char * s = (char *) malloc(sizeof(char) * 100);
-	//strcat(s,user);
-	//strcat(s,"^");
-	//strcat(s,password);
+	strcat(s,user);
+	strcat(s,"^");
+	strcat(s,password);
 
 	while(i < 100) {
 		if(strcmp(userpass[i],s) == 0) {
