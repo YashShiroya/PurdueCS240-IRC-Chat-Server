@@ -405,16 +405,20 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 
 	printf("user %s, password %s\n",user,password);
 
-	if(file != NULL) {
-		//printf("Hello\n");
-		fprintf(file,"%s^%s\n",user,password);
-	}
-	
+	if(find_s_users(users,user) == -1) {	
+		fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
 	return;
+	}
+	
+	if(find_s_users(users,user) == 1) {
+		const char * ms = "DENIED\r\n";
+		write(fd,ms,strlen(ms));
+		return;
+	}
 }
 
 	void
