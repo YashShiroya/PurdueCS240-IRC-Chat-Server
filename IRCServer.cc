@@ -29,30 +29,29 @@ const char * usage =
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <iostream>
+//#include <vector.h>
 #define MAX_USERS 1000
 
 #include "IRCServer.h"
 #include "HashTableVoid.h"
-
+//using namespace std;
 FILE * file;
 
-/*struct s_users {
-  char * s_userpass;
-  };
-  */
-//struct s_users users[10];
-
 int m = 100; int n = 100;
+/*typedef std::vector<char *> ch_vector;
+ch_vector userpass;*/
 char * userpass[100];
 
-/*void init_users(char * userpass[100]) {
-  int i = 0;
-  while(i < 100) {
-  userpass[i] = (char*) malloc(sizeof(char) * 100);
-  i++;
-  }
-  }
-  */
+struct Room {
+	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
+	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
+	int msg_num = 0;
+};
+
+
+Room rooms[100];
+
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
@@ -423,15 +422,11 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	int i = 0;
 	while(i < 100) {
 		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
-			const char * m =  "PASSWORD CORRECT!\r\n";
-			write(fd, m, strlen(m));
 			return true;
 		}
 		i++;
 	}
 
-	const char * m =  "PASSWORD INCORRECT!\r\n";
-	write(fd, m, strlen(m));
 	return false;
 
 }
@@ -463,7 +458,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-
+	
 }
 
 	void
