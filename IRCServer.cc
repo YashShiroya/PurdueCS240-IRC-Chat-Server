@@ -408,6 +408,8 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 		printf("Existing\n");
 		return;
 	}*/	
+	
+	printf("user %s, password %s\n",user,password);
 
 	if(file != NULL) {
 		//printf("Hello\n");
