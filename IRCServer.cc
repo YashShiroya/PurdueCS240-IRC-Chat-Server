@@ -225,6 +225,9 @@ void IRCServer::processRequest( int fd )
 			if(space_encountered <= 3) {
 				j = 0;
 			}
+			else {
+				argz[++j] = ' ';
+			}
 		}
 		else {
 			if(space_encountered == 0) {
