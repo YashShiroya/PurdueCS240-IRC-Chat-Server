@@ -336,6 +336,8 @@ IRCServer::initialize()
 	char sep[4] = "^";
 	int number_users = 0;
 
+	init_s_users(users);
+	
 	// Open password file
 	if(file != NULL) {
 		while((string = nextword(file)) != NULL) {
@@ -399,25 +401,15 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	int i = 0;
-	file = fopen("userpass.txt","a+");
+	file = fopen("userpass.txt","a");
 
-	init_s_users(users);
-	initialize();
-
-	/*if(find_s_users(users,user) == 1 ) {
-		printf("Existing\n");
-		return;
-	}*/	
-	
 	printf("user %s, password %s\n",user,password);
 
 	if(file != NULL) {
 		//printf("Hello\n");
 		fprintf(file,"%s^%s\n",user,password);
 	}
-
-
-
+	
 	fclose(file);
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));

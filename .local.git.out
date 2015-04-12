@@ -805,3 +805,7 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+), 1 deletion(-)
 [master a6b7a77] Make IRCServer
  1 file changed, 2 insertions(+)
+[master 53ff686] Make IRCServer
+ 5 files changed, 8 insertions(+), 6 deletions(-)
+ rewrite IRCServer (68%)
+ create mode 100644 password.txt
