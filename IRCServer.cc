@@ -371,7 +371,7 @@ IRCServer::initialize()
 
 void IRCServer::init_s_users(s_users user_array[10]) {
 	int i = 0;
-	while(i < MAX_USERS) {
+	while(i < 10) {
 		user_array[i].s_username = "default";
 		user_array[i].s_password = "default";
 		i++;
@@ -381,7 +381,7 @@ void IRCServer::init_s_users(s_users user_array[10]) {
 
 int IRCServer::find_s_users( s_users user_array[10],const char * user) {
 	int i = 0;
-	while(i < MAX_USERS) {		
+	while(i < 10) {		
 		printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
 		if(strcmp(user_array[i].s_username,user) == 0) {
 			printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
