@@ -345,6 +345,11 @@ IRCServer::initialize()
 	/*char * token = (char*)malloc(100 * sizeof(char));
 	  char sep[4] = "^";
 	  int number_users = 0;*/
+	int j = 0;
+	while(j < 100) {
+		userpass[j] = (char*) malloc(sizeof(char) * 100);
+		j++;
+	}
 
 	int i = 0;
 	// Open password file
