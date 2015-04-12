@@ -36,6 +36,12 @@ const char * usage =
 
 FILE * file;
 
+struct s_users {
+	char * s_username;
+	char * s_password;
+};
+
+ s_users users[MAX_USERS];
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
@@ -296,49 +302,86 @@ void IRCServer::processRequest( int fd )
 
 	close(fd);	
 }
+
+#define MAXWORD 200
+char word[MAXWORD];  
+
+char * IRCServer::nextword(FILE * fd){
+	int c;int i = 0;
+	memset(word, 0, MAXWORD);
+	while((c = fgetc(fd)) != EOF) {
+		if(c != '\n') {
+			word[i++] = c;
+		}
+		else if( c == '\n') {
+			if(i > 0) {
+				return word;
+			}
+		}
+	}
+	return NULL;
+}
+
+
+
 //My Functions____________________________
 //Given Functions_________________________
 	void
 IRCServer::initialize()
-{
+{	
+	char * string = (char*)malloc(20 * sizeof(char));
+	file = fopen("userpass.txt","r");
+	char * token = (char*)malloc(100 * sizeof(char));
+	char sep[4] = "^";
+	int number_users = 0;
+
 	// Open password file
 	if(file != NULL) {
-
-	}	
+		while((string = nextword(file)) != NULL) {
+			token = strtok(string,sep);
+			users[number_users].s_username = token;
+			token = strtok(NULL,sep);
+			users[number_users].s_password = token;
+			number_users++;
+		}
+			
+	}		
+		
 	// Initialize users in room
 
 	// Initalize message list
-
 }
-/*
-   struct s_users {
-   char * s_username;
-   char * s_password;
-   } ;
-
-   typedef struct s_users s_users;
-
-   s_users users[1000];
 
 
 
-   int IRCServer::init_s_users(s_users[] user_array) {
-   int i = 0;
-   while(i < MAX_USERS) {
-   user_array[i].s_username = "default";
-   user_array[i].s_password = "default";
-   }
-   }
+/*struct s_users {
+	char * s_username;
+	char * s_password;
+} 
 
-   int IRCServer::find_s_users(s_users[] user_array,const char * user) {
-   int i = 0;
-   while(i < MAX_USERS) {
-   if(strcmp(user_array[i].s_username,user) == 0) {
-   return 1;
-   }
-   }
-   return -1;
-   }*/
+typedef struct s_users s_users;*/
+
+//s_users users[1000];
+
+
+
+int IRCServer::init_s_users(struct s_users user_array[]) {
+	int i = 0;
+	while(i < MAX_USERS) {
+		user_array[i].s_username = "default";
+		user_array[i].s_password = "default";
+	}
+}
+
+int IRCServer::find_s_users(struct s_users user_array[],const char * user) {
+	int i = 0;
+	while(i < MAX_USERS) {
+		if(strcmp(user_array[i].s_username,user) == 0) {
+			return 1;
+		}
+	}
+	return -1;
+}
 
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
@@ -349,14 +392,15 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	file = fopen("userpass.txt","a+");
-	if(file != NULL) {
-		fprintf(file,"%s^%s\n",user,password);
-	}
+//	while()
+		if(file != NULL) {
+			fprintf(file,"%s^%s\n",user,password);
+		}
 
 	fclose(file);
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
-	
+
 	return;
 }
 
