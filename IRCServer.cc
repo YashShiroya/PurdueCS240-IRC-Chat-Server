@@ -426,6 +426,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 			write(fd, m, strlen(m));
 			return;
 		}
+		i++;
 	}
 	
 	fprintf(file,"%s^%s\n",user,password);	
