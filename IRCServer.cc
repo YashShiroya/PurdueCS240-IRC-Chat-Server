@@ -520,7 +520,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			i++;
 		}
 		write(fd,heading,strlen(heading));
-		const char * roomList = s;
+		const char * roomList = "YOLO\r\n";
 		write(fd,roomList,strlen(roomList));
 		return;
 	}
