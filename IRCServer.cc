@@ -423,14 +423,14 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	int i = 0;
 	while(i < 100) {
 		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
-			char * m =  "PASSWORD CORRECT!\r\n";
+			const char * m =  "PASSWORD CORRECT!\r\n";
 			write(fd, m, strlen(m));
 			return true;
 		}
 		i++;
 	}
 
-	char * m =  "PASSWORD INCORRECT!\r\n";
+	const char * m =  "PASSWORD INCORRECT!\r\n";
 	write(fd, m, strlen(m));
 	return false;
 
@@ -444,7 +444,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	//Rooms
 	while(i < 100) {
 		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
-			char * m =  "DENIED\r\n";
+			const char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
 		}
