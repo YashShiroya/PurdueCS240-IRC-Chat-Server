@@ -400,7 +400,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("userpass.txt","a+");
 
-//	init_s_users(users);
+	init_s_users(users);
 //	initialize();
 
 	if(find_s_users(users,user) == 1 ) {
