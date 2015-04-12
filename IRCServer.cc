@@ -489,7 +489,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		printf("Entered room creation, Total Rooms %d\n",number_rooms);
 		if(number_rooms < 100) {
 			rooms[number_rooms].room_name = args; 
-			const char * s = "OK, ROOM CREATED";
+			const char * s = "OK, ROOM CREATED\r\n";
 			printf(">>>>>Server Message>>>>>>\n");
 			printf("Room Name %s, Room Number %d\n",args,number_rooms);
 			write(fd,s,strlen(s));
@@ -498,14 +498,27 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		return;
 	}
 
-	const char * m = "WRONG PASSWORD";
+	const char * m = "WRONG PASSWORD\r\n";
 	write(fd,m,strlen(m));
 	return;
 }
 
 	void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
-{
+{	int i = 0;
+	const char * heading = "######## LISTING ROOMS ########\r\n";
+	char * s = (char*)malloc(sizeof(char) * 1000);
+
+	if(checkPassword(fd,user,password) == true) {
+		while(i < number_rooms) {
+			strcat(s,rooms[i].room_name);
+			strcat(s,"\r\n");
+			i++;
+		}
+		write(fd,heading,strlen(heading));
+		write(fd,s,strlen(s));
+		return;
+	}
 
 } 
 
