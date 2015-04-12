@@ -769,3 +769,6 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+), 1 deletion(-)
 [master 5efe5cd] Make IRCServer
  4 files changed, 22 insertions(+), 20 deletions(-)
+[master dea269c] Make IRCServer
+ 5 files changed, 5 insertions(+), 6 deletions(-)
+ create mode 100644 .userpass.txt.swp
