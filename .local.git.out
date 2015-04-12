@@ -703,3 +703,7 @@ After doing this, you may fix the identity used for this commit with:
  delete mode 100644 .IRCServer.cc.swp
  rewrite IRCServer (87%)
  create mode 100644 userpass.txt
+[master 19cb04f] Make IRCServer
+ 5 files changed, 20 insertions(+), 12 deletions(-)
+ create mode 100755 .nfs0000000000f140e0000010bf
+ create mode 100644 .nfs0000000000f15a33000010be
