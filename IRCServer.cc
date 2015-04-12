@@ -36,13 +36,23 @@ const char * usage =
 
 FILE * file;
 
-struct s_users {
-	char * s_username;
-	char * s_password;
+/*struct s_users {
+	char * s_userpass;
 };
+*/
+//struct s_users users[10];
 
-struct s_users users[10];
+int m = 100; int n = 100;
+char * userpass[100];
 
+/*void init_users(char * userpass[100]) {
+	int i = 0;
+	while(i < 100) {
+		userpass[i] = (char*) malloc(sizeof(char) * 100);
+		i++;
+	}
+}
+*/
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
 int IRCServer::open_server_socket(int port) {
@@ -330,23 +340,24 @@ char * IRCServer::nextword(FILE * fd){
 	void
 IRCServer::initialize()
 {	
-	char * string = (char*)malloc(20 * sizeof(char));
+	char * string = (char*)malloc(100 * sizeof(char));
 	file = fopen("password.txt","r");
-	char * token = (char*)malloc(100 * sizeof(char));
+	/*char * token = (char*)malloc(100 * sizeof(char));
 	char sep[4] = "^";
-	int number_users = 0;
+	int number_users = 0;*/
 
-	init_s_users(users);
-	
+//	init_users(userpass);
+	int i = 0;
 	// Open password file
 	if(file != NULL) {
 		while((string = nextword(file)) != NULL) {
-			token = strtok(string,sep);
+			/*token = strtok(string,sep);
 			users[number_users].s_username = token;
 			token = strtok(NULL,sep);
 			users[number_users].s_password = token;
 			printf("user %s, password %s, user_number %d\n",users[number_users].s_username,users[number_users].s_password,number_users);
-			number_users++;
+			number_users++;*/
+			userpass[i] = string; i++;
 		}
 
 	}		
@@ -369,7 +380,7 @@ IRCServer::initialize()
 
 
 
-void IRCServer::init_s_users(s_users user_array[10]) {
+/*void IRCServer::init_s_users(s_users user_array[10]) {
 	int i = 0;
 	while(i < 10) {
 		user_array[i].s_username = "default";
@@ -377,9 +388,9 @@ void IRCServer::init_s_users(s_users user_array[10]) {
 		i++;
 	}
 
-}
+}*/
 
-int IRCServer::find_s_users( s_users user_array[10],const char * user) {
+/*int IRCServer::find_s_users( s_users user_array[10],const char * user) {
 	int i = 0;
 	while(i < 10) {		
 		printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
@@ -390,7 +401,7 @@ int IRCServer::find_s_users( s_users user_array[10],const char * user) {
 		i++;
 	}
 	return -1;
-}
+}*/
 
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
@@ -404,22 +415,16 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("password.txt","a");
 
-	printf("find %d",find_s_users(users,user));
-
-	if(find_s_users(users,user) == -1) {	
-		fprintf(file,"%s^%s\n",user,password);	
+	fprintf(file,"%s^%s\n",user,password);	
+	
 	fclose(file);
+	
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
 	return;
-	}
+
 	
-	if(find_s_users(users,user) == 1) {
-		const char * ms = "DENIED\r\n";
-		write(fd,ms,strlen(ms));
-		return;
-	}
 }
 
 	void
