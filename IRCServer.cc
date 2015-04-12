@@ -29,9 +29,12 @@ const char * usage =
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#define MAX_USERS 1000
 
 #include "IRCServer.h"
 #include "HashTableVoid.h"
+
+FILE * file;
 
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
@@ -239,7 +242,7 @@ void IRCServer::processRequest( int fd )
 
 	const char * command = cmd;
 	const char * user = usr;
-	const char * password = pswrd;           //Removed CONST________________________________________
+	const char * password = pswrd;          
 	const char * args = argz;
 
 
@@ -286,17 +289,43 @@ void IRCServer::processRequest( int fd )
 IRCServer::initialize()
 {
 	// Open password file
-
+	if(file != NULL) {
+		
+	}	
 	// Initialize users in room
 
 	// Initalize message list
 
 }
-
-struct product {
-	int weight;
-	double price;
+/*
+struct s_users {
+	char * s_username;
+	char * s_password;
 } ;
+
+typedef struct s_users s_users;
+
+s_users users[1000];
+
+
+
+int IRCServer::init_s_users(s_users[] user_array) {
+	int i = 0;
+	while(i < MAX_USERS) {
+		user_array[i].s_username = "default";
+		user_array[i].s_password = "default";
+	}
+}
+
+int IRCServer::find_s_users(s_users[] user_array,const char * user) {
+	int i = 0;
+	while(i < MAX_USERS) {
+		if(strcmp(user_array[i].s_username,user) == 0) {
+			return 1;
+		}
+	}
+	return -1;
+}*/
 
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
@@ -306,8 +335,10 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-
-
+	file = fopen("userpass.txt","w");
+	if(file != NULL) {
+		fprintf(file,"%s^%s",user,password);
+	}
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
@@ -315,8 +346,21 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 }
 
 	void
+IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
+{
+
+}
+
+	void
+IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
+{
+
+} 
+
+	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
+
 }
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)

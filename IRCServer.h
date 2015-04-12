@@ -13,8 +13,10 @@ private:
 public:
 	void initialize();
 	//My Functions
-	void extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd);
+	//void extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd);
 	//Given Functions
+	void createRoom(int fd, const char * user, const char * password, const char * args);
+	void listRoom(int fd, const char * user, const char * password, const char * args);
 	bool checkPassword(int fd, const char * user, const char * password);
 	void processRequest( int socket );
 	void addUser(int fd, const char * user, const char * password, const char * args);
