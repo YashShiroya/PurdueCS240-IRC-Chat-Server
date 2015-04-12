@@ -494,7 +494,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 			rooms[number_rooms].room_name = args; 
 			const char * s = "OK, ROOM CREATED\r\n";
 			printf(">>>>>Server Message>>>>>>\n");
-			printf("Room Name %s, Room Number %d\n",args,number_rooms);
+			printf("Room Name %s, Room Number %d\n",rooms[number_rooms].room_name,number_rooms);
 			write(fd,s,strlen(s));
 			number_rooms++;
 		}
