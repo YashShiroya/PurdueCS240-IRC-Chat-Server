@@ -516,12 +516,12 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 		while(i < number_rooms) {
 			strcat(s,rooms[i].room_name);
 			strcat(s,"\r\n");
+			printf("s cat %s\n",s);
 			i++;
 		}
 		write(fd,heading,strlen(heading));
 		const char * roomList = s;
 		write(fd,roomList,strlen(roomList));
-		printf("s rooms %s",s);
 		return;
 	}
 	return;

@@ -877,3 +877,6 @@ After doing this, you may fix the identity used for this commit with:
 [master 60f59fb] Make IRCServer
  2 files changed, 2 insertions(+)
  create mode 100755 .nfs0000000000f1092400000ace
+[master 263b94e] Make IRCServer
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+ rename .nfs0000000000f1092400000ace => IRCServer (66%)
