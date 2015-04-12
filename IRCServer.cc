@@ -409,7 +409,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 		return;
 	}*/	
 	
-	printf("user %s, password %s\n",user,password);
+	//printf("user %s, password %s\n",user,password);
 
 	if(file != NULL) {
 		//printf("Hello\n");
