@@ -240,14 +240,17 @@ void IRCServer::processRequest( int fd )
 		if(space_encountered >= 3) {
 			argz[j++] = a; argz[j] = 0;
 		}
-		int k = 0;
-		while(k < strlen(argz) - 1) {
-			argz[k] = argz[k+1];
-			k++;
-		}
-		argz[k+1] = '\0';
 		i++;
 	}
+
+	int k = 0;
+
+	               while(k < strlen(argz) - 1) {
+	                         argz[k] = argz[k+1];
+	                         k++;
+	                 }
+	                 argz[k+1] = '\0';
+
 
 	const char * command = cmd;
 	const char * user = usr;
