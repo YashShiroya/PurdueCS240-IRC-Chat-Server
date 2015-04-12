@@ -404,7 +404,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	initialize();
 		
 	if(find_s_users(users,user) == 1 ) {
-		write(fd,"Existing",8);
+		printf("Existing\n");
 		return;
 	}	
 
