@@ -222,7 +222,9 @@ void IRCServer::processRequest( int fd )
 
 		if(a == ' ') { 
 			space_encountered++;
-			j = 0;
+			if(space_encountered <= 3) {
+				j = 0;
+			}
 		}
 		else {
 			if(space_encountered == 0) {
