@@ -339,6 +339,7 @@ IRCServer::initialize()
 	// Open password file
 	if(file != NULL) {
 		while((string = nextword(file)) != NULL) {
+			printf("string %s\n",string);
 			token = strtok(string,sep);
 			users[number_users].s_username = token;
 			token = strtok(NULL,sep);
