@@ -41,7 +41,7 @@ struct s_users {
 	char * s_password;
 };
 
- struct s_users users[1000];
+struct s_users users[1000];
 
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
@@ -346,9 +346,9 @@ IRCServer::initialize()
 			printf("user %s, password %s\n",users[number_users].s_username,users[number_users].s_password);
 			number_users++;
 		}
-			
+
 	}		
-		
+
 	// Initialize users in room
 
 	// Initalize message list
@@ -357,11 +357,11 @@ IRCServer::initialize()
 
 
 /*struct s_users {
-	char * s_username;
-	char * s_password;
-} 
+  char * s_username;
+  char * s_password;
+  } 
 
-typedef struct s_users s_users;*/
+  typedef struct s_users s_users;*/
 
 //s_users users[1000];
 
@@ -383,7 +383,7 @@ int IRCServer::find_s_users( s_users user_array[1000],const char * user) {
 		if(strcmp(user_array[i].s_username,user) == 0) {
 			return 1;
 		}
-	i++;
+		i++;
 	}
 	return -1;
 }
@@ -399,20 +399,20 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 {
 	int i = 0;
 	file = fopen("userpass.txt","a+");
-	
+
 	init_s_users(users);
 	initialize();
-		
-	if(find_s_users(users,user) == 1 ) {
+
+	/*if(find_s_users(users,user) == 1 ) {
 		printf("Existing\n");
 		return;
-	}	
+	}*/	
 
-		if(file != NULL) {
-			fprintf(file,"%s^%s\n",user,password);
-		}
+	if(file != NULL) {
+		fprintf(file,"%s^%s\n",user,password);
+	}
 
-		
+
 
 	fclose(file);
 	const char * msg =  "OK\r\n";
