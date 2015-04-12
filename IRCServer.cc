@@ -519,7 +519,8 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			i++;
 		}
 		write(fd,heading,strlen(heading));
-		write(fd,s,strlen(s));
+		const char * roomList = s;
+		write(fd,roomList,strlen(roomList));
 		printf("s rooms %s",s);
 		return;
 	}
