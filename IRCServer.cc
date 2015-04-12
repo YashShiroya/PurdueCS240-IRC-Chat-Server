@@ -249,7 +249,7 @@ void IRCServer::processRequest( int fd )
 	                         argz[k] = argz[k+1];
 	                         k++;
 	                 }
-	                 argz[k+1] = '\0';
+	                 argz[k] = '\0';
 
 
 	const char * command = cmd;
