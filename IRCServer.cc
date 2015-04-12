@@ -396,12 +396,22 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
+	int i = 0;
 	file = fopen("userpass.txt","a+");
+	
 	init_s_users(users);
-//	while()
+	initialize();
+		
+	if(find_s_users(users,user) == 1 ) {
+		write(fd,"Existing",8);
+		return;
+	}	
+
 		if(file != NULL) {
 			fprintf(file,"%s^%s\n",user,password);
 		}
+
+		
 
 	fclose(file);
 	const char * msg =  "OK\r\n";
