@@ -18,9 +18,9 @@ class IRCServer {
 		struct s_users {
 			char * s_username;
 			char * s_password;
-		} ;
+		};
 
-		//typedef struct s_users s_users;
+		typedef struct s_users s_users;
 
 		void createRoom(int fd, const char * user, const char * password, const char * args);
 		void listRoom(int fd, const char * user, const char * password, const char * args);
