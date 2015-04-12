@@ -409,10 +409,31 @@ IRCServer::initialize()
   return -1;
   }*/
 
+char * nyancat(const char * user, const char * password) {
+	char * s = (char *) malloc(sizeof(char) * 100);
+	strcat(s,user);
+	strcat(s,"^");
+	strcat(s,password);
+	return s;
+}
+
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password
-	return true;
+	int i = 0;
+	while(i < 100) {
+		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
+			char * m =  "PASSWORD CORRECT!\r\n";
+			write(fd, m, strlen(m));
+			return true;
+		}
+		i++;
+	}
+
+	char * m =  "PASSWORD INCORRECT!\r\n";
+	write(fd, m, strlen(m));
+	return false;
+
 }
 
 
@@ -420,20 +441,16 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 {
 	int i = 0;
 	file = fopen("password.txt","a");
-	char * s = (char *) malloc(sizeof(char) * 100);
-	strcat(s,user);
-	strcat(s,"^");
-	strcat(s,password);
-
+	//Rooms
 	while(i < 100) {
-		if(strcmp(userpass[i],s) == 0) {
+		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
 			char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
 		}
 		i++;
 	}
-	
+
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
