@@ -404,7 +404,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("password.txt","a");
 
-	printf("user %s, password %s\n",user,password);
+	printf("find %d",find_s_users(users,user));
 
 	if(find_s_users(users,user) == -1) {	
 		fprintf(file,"%s^%s\n",user,password);	
