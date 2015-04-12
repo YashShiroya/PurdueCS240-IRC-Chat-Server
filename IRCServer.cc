@@ -520,8 +520,10 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 		}
 		write(fd,heading,strlen(heading));
 		write(fd,s,strlen(s));
+		printf("s rooms %s",s);
 		return;
 	}
+	return;
 
 } 
 
