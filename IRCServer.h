@@ -15,18 +15,18 @@ class IRCServer {
 		//My Functions
 		//void extract_from_CommandLine(char cmdLine[], char * &  cmd, char * &  usr, char * &  pswrd);
 		//Given Functions
-		struct s_users {
+		/*struct s_users {
 			char * s_username;
 			char * s_password;
-		};
+		};*/
 
-		struct s_users users[1000];
+		//struct s_users users[1000];
 
 		void createRoom(int fd, const char * user, const char * password, const char * args);
 		void listRoom(int fd, const char * user, const char * password, const char * args);
 		bool checkPassword(int fd, const char * user, const char * password);
-		int find_s_users(s_users user_array[1000],const char * user);
-		void init_s_users(s_users user_array[1000]);
+		int find_s_users(struct s_users user_array[1000],const char * user);
+		void init_s_users(struct s_users user_array[1000]);
 		char * nextword(FILE * fd);
 		void processRequest( int socket );
 		void addUser(int fd, const char * user, const char * password, const char * args);

@@ -331,7 +331,7 @@ char * IRCServer::nextword(FILE * fd){
 IRCServer::initialize()
 {	
 	char * string = (char*)malloc(20 * sizeof(char));
-	file = fopen("userpass.txt","r");
+	file = fopen("password.txt","r");
 	char * token = (char*)malloc(100 * sizeof(char));
 	char sep[4] = "^";
 	int number_users = 0;
