@@ -346,7 +346,6 @@ IRCServer::initialize()
 	char sep[4] = "^";
 	int number_users = 0;*/
 
-//	init_users(userpass);
 	int i = 0;
 	// Open password file
 	if(file != NULL) {
@@ -357,7 +356,9 @@ IRCServer::initialize()
 			users[number_users].s_password = token;
 			printf("user %s, password %s, user_number %d\n",users[number_users].s_username,users[number_users].s_password,number_users);
 			number_users++;*/
-			userpass[i] = string; i++;
+			userpass[i] = string;
+			printf("userpass %s\n",userpass[i]);
+			i++;
 		}
 
 	}		
