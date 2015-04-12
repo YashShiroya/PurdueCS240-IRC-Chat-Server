@@ -41,7 +41,7 @@ struct s_users {
 	char * s_password;
 };
 
-struct s_users users[1000];
+struct s_users users[10];
 
 int QueueLength = 5;
 //void extract_from_CommandLine(char * &  cmd, char * &  usr, char * &  pswrd);
@@ -369,7 +369,7 @@ IRCServer::initialize()
 
 
 
-void IRCServer::init_s_users(s_users user_array[1000]) {
+void IRCServer::init_s_users(s_users user_array[10]) {
 	int i = 0;
 	while(i < MAX_USERS) {
 		user_array[i].s_username = "default";
@@ -379,10 +379,10 @@ void IRCServer::init_s_users(s_users user_array[1000]) {
 
 }
 
-int IRCServer::find_s_users( s_users user_array[1000],const char * user) {
+int IRCServer::find_s_users( s_users user_array[10],const char * user) {
 	int i = 0;
 	while(i < MAX_USERS) {		
-		printf("user %s\n",user_array[i].s_username);
+		printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
 		if(strcmp(user_array[i].s_username,user) == 0) {
 			printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
 			return 1;
