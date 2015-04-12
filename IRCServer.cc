@@ -343,7 +343,7 @@ IRCServer::initialize()
 			users[number_users].s_username = token;
 			token = strtok(NULL,sep);
 			users[number_users].s_password = token;
-			printf("user %s, password %s\n",users[number_users].s_username,users[number_users].s_password);
+			printf("user %s, password %s, user_number %d\n",users[number_users].s_username,users[number_users].s_password,number_users);
 			number_users++;
 		}
 
