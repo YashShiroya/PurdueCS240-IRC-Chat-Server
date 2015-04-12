@@ -404,10 +404,10 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	init_s_users(users);
 	initialize();
 
-	if(find_s_users(users,user) == 1 ) {
+	/*if(find_s_users(users,user) == 1 ) {
 		printf("Existing\n");
 		return;
-	}	
+	}*/	
 
 	if(file != NULL) {
 		//printf("Hello\n");
