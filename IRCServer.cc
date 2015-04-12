@@ -41,10 +41,11 @@ FILE * file;
 int m = 100; int n = 100;
 /*typedef std::vector<char *> ch_vector;
 ch_vector userpass;*/
+int number_rooms = 0;
 char * userpass[100];
 
 struct Room {
-	char * room_name = (char *) malloc(sizeof(char) * 100);
+	const char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
@@ -433,11 +434,12 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		}
 		i++;
 	}
-
+	
+	char * msg = "PASSWORD INCORRECT";
+	write(fd,msg,strlen(msg));
 	return false;
 
 }
-
 
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
@@ -465,7 +467,31 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
+	int i = 0;
+	if(checkPassword(fd,user,password) == true) {
+	while(i < number_rooms) {
+		if(strcmp(args,rooms[number_rooms].room_name) == 0) {
+			const char * s = "DENIED ROOMS CREATION";
+			write(fd,s,strlen(s));
+			printf("DENIED ROOM CREATION\n Total rooms %d\n",number_rooms);
+			return;
+		}
+		i++;
+	}	
 	
+	printf("Entered room creation, Total Rooms %d\n",number_rooms);
+	if(number_rooms < 100) {
+		rooms[number_rooms].room_name = args; 
+		const char * s = "OK, ROOM CREATED";
+		printf("Room Name %s, Room Number %d\n",args,number_rooms);
+		number_rooms++;
+	}
+	return;
+	}
+
+	const char * m = "WRONG PASSWORD";
+	write(fd,m,strlen(m));
+	return;
 }
 
 	void
