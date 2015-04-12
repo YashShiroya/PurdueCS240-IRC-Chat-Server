@@ -357,7 +357,7 @@ IRCServer::initialize()
 	}
 
 	//Initialize Room array
-	int k = 0; int l = 0; int m = 0;
+	/*int k = 0; int l = 0; int m = 0;
 	while(k < 100) {
 		while (l < 100) {
 			rooms[k].userInfo[l] = (char*) malloc(sizeof(char) * 100);
@@ -368,7 +368,7 @@ IRCServer::initialize()
 			m++;
 		}
 		k++;
-	}
+	}*/
 
 	int i = 0;
 	// Open password file
