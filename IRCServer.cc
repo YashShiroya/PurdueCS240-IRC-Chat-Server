@@ -226,7 +226,7 @@ void IRCServer::processRequest( int fd )
 				j = 0;
 			}
 		}
-
+		else {
 			if(space_encountered == 0) {
 				cmd[j++] = a; cmd[j] = 0;
 			}
@@ -236,10 +236,11 @@ void IRCServer::processRequest( int fd )
 			else if(space_encountered == 2) {
 				pswrd[j++] = a; pswrd[j] = 0;
 			}
-			else if(space_encountered >= 3) {
-				argz[j++] = a; argz[j] = 0;
-			}
-		
+		}
+		if(space_encountered >= 3) {
+			argz[j++] = a; argz[j] = 0;
+		}
+
 
 		i++;
 	}
@@ -294,7 +295,7 @@ IRCServer::initialize()
 {
 	// Open password file
 	if(file != NULL) {
-		
+
 	}	
 	// Initialize users in room
 
@@ -302,34 +303,34 @@ IRCServer::initialize()
 
 }
 /*
-struct s_users {
-	char * s_username;
-	char * s_password;
-} ;
+   struct s_users {
+   char * s_username;
+   char * s_password;
+   } ;
 
-typedef struct s_users s_users;
+   typedef struct s_users s_users;
 
-s_users users[1000];
+   s_users users[1000];
 
 
 
-int IRCServer::init_s_users(s_users[] user_array) {
-	int i = 0;
-	while(i < MAX_USERS) {
-		user_array[i].s_username = "default";
-		user_array[i].s_password = "default";
-	}
-}
+   int IRCServer::init_s_users(s_users[] user_array) {
+   int i = 0;
+   while(i < MAX_USERS) {
+   user_array[i].s_username = "default";
+   user_array[i].s_password = "default";
+   }
+   }
 
-int IRCServer::find_s_users(s_users[] user_array,const char * user) {
-	int i = 0;
-	while(i < MAX_USERS) {
-		if(strcmp(user_array[i].s_username,user) == 0) {
-			return 1;
-		}
-	}
-	return -1;
-}*/
+   int IRCServer::find_s_users(s_users[] user_array,const char * user) {
+   int i = 0;
+   while(i < MAX_USERS) {
+   if(strcmp(user_array[i].s_username,user) == 0) {
+   return 1;
+   }
+   }
+   return -1;
+   }*/
 
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
@@ -340,9 +341,9 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	/*file = fopen("userpass.txt","w");
-	if(file != NULL) {
-		fprintf(file,"%s^%s\n",user,password);
-	}*/
+	  if(file != NULL) {
+	  fprintf(file,"%s^%s\n",user,password);
+	  }*/
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
