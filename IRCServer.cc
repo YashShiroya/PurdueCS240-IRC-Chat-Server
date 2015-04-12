@@ -243,14 +243,15 @@ void IRCServer::processRequest( int fd )
 		i++;
 	}
 
-	int k = 0;
+	if(strlen(argz) != 0) {
+		int k = 0;
 
-	               while(k < strlen(argz) - 1) {
-	                         argz[k] = argz[k+1];
-	                         k++;
-	                 }
-	                 argz[k] = '\0';
-
+		while(k < strlen(argz) - 1) {
+			argz[k] = argz[k+1];
+			k++;
+		}
+		argz[k] = '\0';
+	}
 
 	const char * command = cmd;
 	const char * user = usr;
@@ -347,10 +348,10 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-	/*file = fopen("userpass.txt","w");
-	  if(file != NULL) {
-	  fprintf(file,"%s^%s\n",user,password);
-	  }*/
+	file = fopen("userpass.txt","a+");
+	if(file != NULL) {
+		fprintf(file,"%s^%s\n",user,password);
+	}
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg));
 
