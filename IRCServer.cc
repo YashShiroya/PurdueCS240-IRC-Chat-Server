@@ -44,11 +44,11 @@ ch_vector userpass;*/
 char * userpass[100];
 
 struct Room {
+	char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
 };
-
 
 Room rooms[100];
 
@@ -341,25 +341,32 @@ IRCServer::initialize()
 {	
 	char * string = (char*)malloc(100 * sizeof(char));
 	file = fopen("password.txt","r");
-	/*char * token = (char*)malloc(100 * sizeof(char));
-	  char sep[4] = "^";
-	  int number_users = 0;*/
 	int j = 0;
+
+	//Initialize userpass
 	while(j < 100) {
 		userpass[j] = (char*) malloc(sizeof(char) * 100);
 		j++;
 	}
 
+	//Initialize Room array
+	int k = 0; int l = 0; int m = 0;
+	while(k < 100) {
+		while (l < 100) {
+			rooms[k].userInfo[l] = (char*) malloc(sizeof(char) * 100);
+			l++;
+		}
+		while(m < 100) {
+			rooms[k].userInfo[m] = (char*) malloc(sizeof(char) * 100);
+			m++;
+		}
+		k++;
+	}
+	
 	int i = 0;
 	// Open password file
 	if(file != NULL) {
 		while((string = nextword(file)) != NULL) {
-			/*token = strtok(string,sep);
-			  users[number_users].s_username = token;
-			  token = strtok(NULL,sep);
-			  users[number_users].s_password = token;
-			  printf("user %s, password %s, user_number %d\n",users[number_users].s_username,users[number_users].s_password,number_users);
-			  number_users++;*/
 			strcpy(userpass[i],string);
 			printf("userpass %s\n",userpass[i]);
 			i++;
