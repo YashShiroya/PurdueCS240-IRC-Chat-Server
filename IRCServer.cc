@@ -305,6 +305,9 @@ void IRCServer::processRequest( int fd )
 	else if (!strcmp(command, "CREATE-ROOM")) {
 		createRoom(fd,user,password,args);
 	}
+	else if (!strcmp(command, "LIST-ROOMS")) {
+		listRoom(fd,user,password);
+	}
 	else {
 		const char * msg =  "UNKNOWN COMMAND\r\n";
 		write(fd, msg, strlen(msg));
@@ -504,7 +507,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 }
 
 	void
-IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
+IRCServer::listRoom(int fd, const char * user, const char * password)
 {	int i = 0;
 	const char * heading = "######## LISTING ROOMS ########\r\n";
 	char * s = (char*)malloc(sizeof(char) * 1000);
