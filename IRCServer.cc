@@ -383,7 +383,7 @@ int IRCServer::find_s_users( s_users user_array[1000],const char * user) {
 		if(strcmp(user_array[i].s_username,user) == 0) {
 			return 1;
 		}
-
+	i++;
 	}
 	return -1;
 }
