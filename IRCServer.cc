@@ -416,9 +416,9 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("password.txt","a");
 	char * s = (char *) malloc(sizeof(char) * 100);
-	strcat(s,user);
-	strcat(s,"^");
-	strcat(s,password);
+	//strcat(s,user);
+	//strcat(s,"^");
+	//strcat(s,password);
 
 	while(i < 100) {
 		if(strcmp(userpass[i],s) == 0) {
