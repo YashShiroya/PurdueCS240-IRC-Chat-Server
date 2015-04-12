@@ -422,8 +422,8 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 
 	while(i < 100) {
 		if(strcmp(userpass[i],s) == 0) {
-			char * m =  "DENIED\r\n";
-			write(fd, m, strlen(m));
+	//		char * m =  "DENIED\r\n";
+	//		write(fd, m, strlen(m));
 			return;
 		}
 		i++;
