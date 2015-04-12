@@ -381,6 +381,7 @@ int IRCServer::find_s_users( s_users user_array[1000],const char * user) {
 	int i = 0;
 	while(i < MAX_USERS) {
 		if(strcmp(user_array[i].s_username,user) == 0) {
+			printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
 			return 1;
 		}
 		i++;
