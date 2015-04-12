@@ -240,8 +240,11 @@ void IRCServer::processRequest( int fd )
 		if(space_encountered >= 3) {
 			argz[j++] = a; argz[j] = 0;
 		}
-
-
+		int k = 0;
+		while(k < strlen(argz) - 1) {
+			argz[k] = argz[k+1];
+		}
+		argz[k+1] = '\0';
 		i++;
 	}
 
