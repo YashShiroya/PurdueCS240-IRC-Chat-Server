@@ -225,11 +225,8 @@ void IRCServer::processRequest( int fd )
 			if(space_encountered <= 3) {
 				j = 0;
 			}
-			else {
-				argz[++j] = ' ';
-			}
 		}
-		else {
+
 			if(space_encountered == 0) {
 				cmd[j++] = a; cmd[j] = 0;
 			}
@@ -242,7 +239,7 @@ void IRCServer::processRequest( int fd )
 			else if(space_encountered >= 3) {
 				argz[j++] = a; argz[j] = 0;
 			}
-		}
+		
 
 		i++;
 	}
