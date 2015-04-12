@@ -370,7 +370,7 @@ int IRCServer::init_s_users( s_users user_array[]) {
 	while(i < MAX_USERS) {
 		user_array[i].s_username = "default";
 		user_array[i].s_password = "default";
-		i++;
+		//i++;
 	}
 }
 

@@ -749,3 +749,6 @@ After doing this, you may fix the identity used for this commit with:
  5 files changed, 120 insertions(+), 63 deletions(-)
  rewrite IRCServer (79%)
  rewrite IRCServer.h (81%)
+[master 7003413] Make IRCServer
+ 5 files changed, 22 insertions(+), 5 deletions(-)
+ create mode 100644 .IRCServer.h.swp
