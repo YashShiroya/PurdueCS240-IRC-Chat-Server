@@ -51,6 +51,7 @@ struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
+	int number_of_users = 0;
 	int msg_num = 0;
 };
 
@@ -475,6 +476,17 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 
 }
 
+int room_index(const char * room_name) {
+	int i = 0; int j = 0;
+	while(i < number_rooms) {
+		if(strcmp(room_name,rooms[i].room_name) == 0) {
+			break;
+		}
+		i++;
+	}
+	return i;
+}
+
 	void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
@@ -505,9 +517,6 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		}
 		return;
 	}
-
-	write(fd,wrong_pass,strlen(wrong_pass));
-	return;
 }
 
 	void
@@ -519,7 +528,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	
 
 	if(checkPassword(fd,user,password) == true) {
-		while(i < number_rooms + 1) {
+		while(i < number_rooms) {
 			strcat(s,rooms[i].room_name);
 			strcat(s,"\r\n");
 			printf("room name %s\n",rooms[i].room_name);
@@ -534,16 +543,42 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 
 } 
 
+
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
+	if(number_rooms == 0) {
+		const char * no_rooms = "NO ROOMS ADDED YET\r\n";
+		write(fd,no_rooms,strlen(no_rooms));
+		return;
+	}
+
+	int check = 0;
 	if(checkPassword(fd,user,password) == true) {
-		
+		int i = 0;
+		while(i < number_rooms) {
+			if(strcmp(args,rooms[i].room_name) == 0) {
+				int check = 1;
+				break;	
+			}
+			i++;
+		}
+		if(check == 0) {
+			const char * wrong_name = "ROOM DOES NOT EXIST\r\n";
+			write(fd,wrong_name,strlen(wrong_name));
+			return;
+		}
+		else if (check == 1) {
+			rooms[i].userInfo[rooms[i].number_of_users] = strdup(nyancat(user,password)); 
+			rooms[i].number_of_users++;
+		}
+
 	}	
 }
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 {
+	
 }
 
 	void
@@ -559,6 +594,24 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 	void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
+	if(number_rooms == 0) {
+		const char * s ="NO ROOMS ADDED YET/r/n";
+		write(fd,s,strlen(s));
+		return;
+	}
+	int room_num = room_index(args);
+	int a = 0;
+	char * users_in_room = (char*)malloc(sizeof(char) * 1000);
+	while(a < rooms[room_num].number_of_users) {
+		char * token = (char*)malloc(sizeof(char) * 100);
+		token = strtok(rooms[room_num].userInfo[a],"^");
+		strcat(users_in_room,token);
+		strcat(users_in_room,"\r\n");
+		a++;
+	}
+		
+	write(fd,users_in_room,strlen(users_in_room));
+	return;
 }
 
 	void
