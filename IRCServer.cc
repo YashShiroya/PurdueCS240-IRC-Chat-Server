@@ -558,7 +558,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		int i = 0;
 		while(i < number_rooms) {
 			if(strcmp(args,rooms[i].room_name) == 0) {
-				int check = 1;
+				 check = 1;
 				break;	
 			}
 			i++;
