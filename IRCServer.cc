@@ -46,7 +46,7 @@ char * userpass[100];
 int number_users = 0;
 
 struct Room {
-	const char * room_name;// = (char *) malloc(sizeof(char) * 100);
+	const char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
