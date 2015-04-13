@@ -358,7 +358,7 @@ IRCServer::initialize()
 	}
 
 	//Initialize Room array
-	/*int k = 0; int l = 0; int m = 0;
+	int k = 0; int l = 0; int m = 0;
 	while(k < 100) {
 		while (l < 100) {
 			rooms[k].userInfo[l] = (char*) malloc(sizeof(char) * 100);
@@ -369,7 +369,7 @@ IRCServer::initialize()
 			m++;
 		}
 		k++;
-	}*/
+	}
 
 	int i = 0;
 	// Open password file
@@ -515,8 +515,13 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 {	int i = 0;
 	const char * heading = "######## LISTING ROOMS ########\r\n";
 	char * s = (char*)malloc(sizeof(char) * 1000);
+	
+	while(i < number_rooms) {
+		printf("rooms %s\n",rooms[i].room_name);
+		i++;
+	}
 
-	if(checkPassword(fd,user,password) == true) {
+	/*if(checkPassword(fd,user,password) == true) {
 		while(i < number_rooms + 1) {
 			strcat(s,rooms[i].room_name);
 			strcat(s,"\r\n");
@@ -527,7 +532,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 		const char * roomList = "YOLO\r\n";
 		write(fd,roomList,strlen(roomList));
 		return;
-	}
+	}*/
 	return;
 
 } 
