@@ -483,10 +483,10 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		//Room created before, check
 		while(i < number_rooms) {
 			if(strcmp(args,rooms[i].room_name) == 0) {
-				const char * s = "DENIED ROOMS CREATION";
+				const char * s = "DENIED ROOMS CREATION\r\n";
 				write(fd,s,strlen(s));
 				 printf(">>>>>Server Message>>>>>>\n");
-				printf("DENIED ROOM CREATION\n Total rooms %d\n",number_rooms);
+				printf("DENIED ROOM CREATION\r\n Total rooms %d\n",number_rooms);
 				return;
 			}
 			i++;
@@ -512,7 +512,8 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 
 	void
 IRCServer::listRoom(int fd, const char * user, const char * password)
-{	int i = 0;
+{	
+	int i = 0;
 	const char * heading = "######## LISTING ROOMS ########\r\n";
 	char * s = (char*)malloc(sizeof(char) * 1000);
 	
@@ -535,7 +536,9 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
-	
+	if(checkPassword(fd,user,password) == true) {
+		
+	}	
 }
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
