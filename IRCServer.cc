@@ -46,7 +46,7 @@ char * userpass[100];
 int number_users = 0;
 
 struct Room {
-	const char * room_name; //= (char *) malloc(sizeof(char) * 100);
+	const char * room_name;// = (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
@@ -495,7 +495,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		//Creating room
 		printf("Entered room creation, Total Rooms %d\n",number_rooms);
 		if(number_rooms < 100) {
-			rooms[number_rooms].room_name = args; 
+			rooms[number_rooms].room_name = strdup(args); 
 			const char * s = "OK, ROOM CREATED\r\n";
 			printf(">>>>>Server Message>>>>>>\n");
 			printf("Room Name %s, Room Number %d\n",rooms[number_rooms].room_name,number_rooms);
