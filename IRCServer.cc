@@ -44,6 +44,8 @@ int m = 100; int n = 100;
 int number_rooms = 0;
 char * userpass[100];
 int number_users = 0;
+const char * wrong_pass = "WRONG PASSWORD!\r\n";
+const char * right_pass = "RIGHT PASSWORD!\r\n";
 
 struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
@@ -443,8 +445,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		i++;
 	}
 
-	char * msg = "PASSWORD INCORRECT";
-	write(fd,msg,strlen(msg));
+	write(fd,wrong_pass,strlen(wrong_pass));
 	return false;
 
 }
@@ -505,8 +506,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		return;
 	}
 
-	const char * m = "WRONG PASSWORD\r\n";
-	write(fd,m,strlen(m));
+	write(fd,wrong_pass,strlen(wrong_pass));
 	return;
 }
 
@@ -529,6 +529,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 		write(fd,s,strlen(s));
 		return;
 	}
+
 	return;
 
 } 
