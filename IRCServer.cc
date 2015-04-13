@@ -43,6 +43,7 @@ int m = 100; int n = 100;
   ch_vector userpass;*/
 int number_rooms = 0;
 char * userpass[100];
+int number_users = 0;
 
 struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
@@ -377,6 +378,7 @@ IRCServer::initialize()
 			strcpy(userpass[i],string);
 			printf("userpass %s\n",userpass[i]);
 			i++;
+			number_users++;
 		}
 
 	}		
@@ -460,7 +462,9 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 		}
 		i++;
 	}
-
+	
+	userpass[number_users] = nyancat(user,password);
+	number_users++;
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
