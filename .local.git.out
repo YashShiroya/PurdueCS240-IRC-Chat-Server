@@ -901,3 +901,5 @@ After doing this, you may fix the identity used for this commit with:
 [master b1d9de4] Make IRCServer
  4 files changed, 4 insertions(+), 2 deletions(-)
  create mode 100644 .IRCServer.cc.swp
+[master e2181cc] Make IRCServer
+ 3 files changed, 4 insertions(+), 1 deletion(-)
