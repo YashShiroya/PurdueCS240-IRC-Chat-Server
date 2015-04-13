@@ -464,7 +464,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 		}
 		i++;
 	}
-	
+
 	userpass[number_users] = nyancat(user,password);
 	number_users++;
 	fprintf(file,"%s^%s\n",user,password);	
@@ -492,19 +492,19 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 {
 	int i = 0;
 	if(checkPassword(fd,user,password) == true) {
-		
+
 		//Room created before, check
 		while(i < number_rooms) {
 			if(strcmp(args,rooms[i].room_name) == 0) {
 				const char * s = "DENIED ROOMS CREATION\r\n";
 				write(fd,s,strlen(s));
-				 printf(">>>>>Server Message>>>>>>\n");
+				printf(">>>>>Server Message>>>>>>\n");
 				printf("DENIED ROOM CREATION\r\n Total rooms %d\n",number_rooms);
 				return;
 			}
 			i++;
 		}	
-		
+
 		//Creating room
 		printf("Entered room creation, Total Rooms %d\n",number_rooms);
 		if(number_rooms < 100) {
@@ -525,7 +525,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	int i = 0;
 	const char * heading = "######## LISTING ROOMS ########\r\n";
 	char * s = (char*)malloc(sizeof(char) * 1000);
-	
+
 
 	if(checkPassword(fd,user,password) == true) {
 		while(i < number_rooms) {
@@ -558,7 +558,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		int i = 0;
 		while(i < number_rooms) {
 			if(strcmp(args,rooms[i].room_name) == 0) {
-				 check = 1;
+				check = 1;
 				break;	
 			}
 			i++;
@@ -578,7 +578,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 {
-	
+
 }
 
 	void
@@ -594,23 +594,26 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 	void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
-	if(number_rooms == 0) {
-		const char * s ="NO ROOMS ADDED YET/r/n";
-		write(fd,s,strlen(s));
+	if(checkPassword(fd,user,password) == true) {
+		if(number_rooms == 0) {
+			const char * s ="NO ROOMS ADDED YET/r/n";
+			write(fd,s,strlen(s));
+			return;
+		}
+		int room_num = room_index(args);
+		int a = 0;
+		char * users_in_room = (char*)malloc(sizeof(char) * 1000);
+		while(a < rooms[room_num].number_of_users) {
+			char * token = (char*)malloc(sizeof(char) * 100);
+			token = strtok(rooms[room_num].userInfo[a],"^");
+			strcat(users_in_room,token);
+			strcat(users_in_room,"\r\n");
+			a++;
+		}
+
+		write(fd,users_in_room,strlen(users_in_room));
 		return;
 	}
-	int room_num = room_index(args);
-	int a = 0;
-	char * users_in_room = (char*)malloc(sizeof(char) * 1000);
-	while(a < rooms[room_num].number_of_users) {
-		char * token = (char*)malloc(sizeof(char) * 100);
-		token = strtok(rooms[room_num].userInfo[a],"^");
-		strcat(users_in_room,token);
-		strcat(users_in_room,"\r\n");
-		a++;
-	}
-		
-	write(fd,users_in_room,strlen(users_in_room));
 	return;
 }
 
