@@ -46,7 +46,7 @@ char * userpass[100];
 int number_users = 0;
 
 struct Room {
-	const char * room_name = (char *) malloc(sizeof(char) * 100);
+	const char * room_name; //= (char *) malloc(sizeof(char) * 100);
 	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
 	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
@@ -516,12 +516,8 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	const char * heading = "######## LISTING ROOMS ########\r\n";
 	char * s = (char*)malloc(sizeof(char) * 1000);
 	
-	while(i < number_rooms) {
-		printf("rooms %s\n",rooms[i].room_name);
-		i++;
-	}
 
-	/*if(checkPassword(fd,user,password) == true) {
+	if(checkPassword(fd,user,password) == true) {
 		while(i < number_rooms + 1) {
 			strcat(s,rooms[i].room_name);
 			strcat(s,"\r\n");
@@ -529,10 +525,9 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			i++;
 		}
 		write(fd,heading,strlen(heading));
-		const char * roomList = "YOLO\r\n";
-		write(fd,roomList,strlen(roomList));
+		write(fd,s,strlen(s));
 		return;
-	}*/
+	}
 	return;
 
 } 
@@ -540,7 +535,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
-
+	
 }
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
