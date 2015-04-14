@@ -439,7 +439,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password
 	int i = 0;
 	while(i < number_users) {
-		printf("userpass_checks %s Entered %s Strcmp %s\n",userpass[i],nyancat(user,password));
+		printf("userpass_checks %s Entered %s\n",userpass[i],nyancat(user,password));
 		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
 			return true;
 		}
