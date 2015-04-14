@@ -456,7 +456,8 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	file = fopen("password.txt","a");
 	//Rooms
 	while(i < 100) {
-		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
+		printf("\nuname value %s, userIn %s\n",uname(userpass[i]),user);
+		if(strcmp(uname(userpass[i]),user) == 0) {
 			const char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
