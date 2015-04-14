@@ -488,7 +488,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 			if(strcmp(args,rooms[i].room_name) == 0) {
 				const char * s = "DENIED ROOMS CREATION\r\n";
 				write(fd,s,strlen(s));
-				 printf(">>>>>Server Message>>>>>>\n");
+				printf(">>>>>Server Message>>>>>>\n");
 				printf("DENIED ROOM CREATION\r\n Total rooms %d\n",number_rooms);
 				return;
 			}
