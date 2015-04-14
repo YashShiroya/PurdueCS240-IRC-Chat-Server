@@ -455,14 +455,14 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	int i = 0;
 	file = fopen("password.txt","a");
 	//Rooms
-	/*while(i < 100) {
+	while(i < 100) {
 		if(strcmp(uname(userpass[i]),user) == 0) {
 			const char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
 		}
 		i++;
-	}*/
+	}
 	
 	userpass[number_users] = nyancat(user,password);
 	number_users++;
@@ -512,8 +512,8 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 }
 
 char * uname(char * userpass) {
-	char * un = (char*)malloc(sizeof(char) * 100);
-	char * token = (char*)malloc(sizeof(char) * 50);
+	char * un = (char*)malloc(sizeof(char) * 200);
+	char * token = (char*)malloc(sizeof(char) * 200);
 	un = strdup(userpass);
 	token = strdup(strtok(un,"^"));
 	return token;
