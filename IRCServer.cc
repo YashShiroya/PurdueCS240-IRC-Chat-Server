@@ -470,7 +470,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	//Testing
 	int j = 0;
 	while(j < number_users) {
-		printf("Username %s\n",userpass[i]);
+		printf("Username %s\n",userpass[j]);
 		j++;
 	}
 	fprintf(file,"%s^%s\n",user,password);	
