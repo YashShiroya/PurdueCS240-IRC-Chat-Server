@@ -355,7 +355,7 @@ IRCServer::initialize()
 	//Initialize userpass
 	while(j < 100) {
 		userpass[j] = (char*) malloc(sizeof(char) * 100);
-		userpass[j] = "";
+		userpass[j] = "A";
 		j++;
 	}
 
