@@ -542,6 +542,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			i++;
 		}
 		write_client(fd,heading);
+		write_client(fd,s);
 	}
 	return;
 
