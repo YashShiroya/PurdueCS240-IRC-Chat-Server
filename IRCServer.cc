@@ -464,7 +464,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 		i++;
 	}
 	
-	userpass[number_users] = nyancat(user,password);
+//	userpass[number_users] = nyancat(user,password);
 	number_users++;
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
