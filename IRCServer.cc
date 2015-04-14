@@ -38,19 +38,18 @@ const char * usage =
 //using namespace std;
 FILE * file;
 char * uname(char * userpass);
+void write_client(int fd, const char * string);
 int m = 100; int n = 100;
-/*typedef std::vector<char *> ch_vector;
-  ch_vector userpass;*/
 int number_rooms = 0;
 char * userpass[100];
 int number_users = 0;
 
 struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
-	char * userInfo[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
-	char * message[100]; // = (char*)malloc(sizeof(char) * 1000);
+	char * users_in_room[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
+	char * messages[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
-	int users_in_room = 0;
+	int number_users_room = 0;
 };
 
 Room rooms[100];
@@ -363,12 +362,12 @@ IRCServer::initialize()
 	int k = 0; int l = 0; int m = 0;
 	while(k < 100) {
 		while (l < 100) {
-			rooms[k].userInfo[l] = (char*) malloc(sizeof(char) * 100);
+			rooms[k].users_in_room[l] = (char*) malloc(sizeof(char) * 100);
 			l++;
 		}
 		while(m < 100) {
 		
-		rooms[k].userInfo[m] = (char*) malloc(sizeof(char) * 100);
+			rooms[k].messages[m] = (char*) malloc(sizeof(char) * 100);
 			m++;
 		}
 		k++;
@@ -534,34 +533,36 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			printf("room name %s\n",rooms[i].room_name);
 			i++;
 		}
-		write(fd,heading,strlen(heading));
-		write(fd,s,strlen(s));
-		return;
+		write_client(fd,heading);
 	}
 	return;
 
 } 
 
+void write_client(int fd,const char * string) {
+	write(fd,string,strlen(string));
+	return;
+}
+
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {	
-	/*int check = 0;
+	int check = 0; int i = 0;
 	if(checkPassword(fd,user,password) == true) {
 		while(i < number_rooms) {
 			if(strcmp(rooms[i].room_name,args) == 0) {
-				int check = 1;
-				const char * room_name_taken = "Room Name Used\r\n";
-				write(fd,room_name_taken,strlen(room_name_taken);
-				return;
+				check = 1;
+				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(nyancat(user,password));
+				rooms[i].number_users_room++;
+				break;
 			}
 			i++;
 		}
 
-		if()
-
-		printf(">>>>>>SERVER MESSAGE>>>>>>>\nEntering room\n");
-		r
-	}*/	
+		if(check == 0) {
+			write_client(fd,"NO SUCH ROOM FOUND\r\n");
+		}
+	}	
 }
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
