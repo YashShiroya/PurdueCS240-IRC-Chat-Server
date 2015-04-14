@@ -470,10 +470,10 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	number_users++;
 	//Testing
 	int j = 0;
-	while(j < number_users) {
+	/*while(j < number_users) {
 		printf("Username %s\n",userpass[j]);
 		j++;
-	}
+	}*/
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
@@ -487,7 +487,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
 	int i = 0;
-	write(fd,"yolo1",5);
+	//write(fd,"yolo1",5);
 	if(checkPassword(fd,user,password) == true) {
 
 		//Room created before, check
