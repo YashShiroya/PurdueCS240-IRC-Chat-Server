@@ -927,3 +927,6 @@ After doing this, you may fix the identity used for this commit with:
 [master 7b70560] Make IRCServer
  4 files changed, 18 insertions(+), 70 deletions(-)
  rewrite IRCServer (83%)
+[master 78d5c97] Make IRCServer
+ 2 files changed, 3 insertions(+)
+ delete mode 100644 .IRCServer.cc.swp

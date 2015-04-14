@@ -37,7 +37,7 @@ const char * usage =
 #include "HashTableVoid.h"
 //using namespace std;
 FILE * file;
-
+char * uname(char * userpass);
 int m = 100; int n = 100;
 /*typedef std::vector<char *> ch_vector;
   ch_vector userpass;*/
@@ -456,7 +456,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	file = fopen("password.txt","a");
 	//Rooms
 	while(i < 100) {
-		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
+		if(strcmp(uname(userpass[i]),user) == 0) {
 			const char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
@@ -511,6 +511,14 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 	return;
 }
 
+char * uname(char * userpass) {
+	char * un = (char*)malloc(sizeof(char) * 100);
+	char * token = (char*)malloc(sizeof(char) * 50);
+	un = strdup(userpass);
+	token = strdup(strtok(un,"^"));
+	return token;
+}
+	
 	void
 IRCServer::listRoom(int fd, const char * user, const char * password)
 {	
