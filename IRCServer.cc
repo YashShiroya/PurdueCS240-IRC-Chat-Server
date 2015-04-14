@@ -355,6 +355,7 @@ IRCServer::initialize()
 	//Initialize userpass
 	while(j < 100) {
 		userpass[j] = (char*) malloc(sizeof(char) * 100);
+		userpass[j] = "";
 		j++;
 	}
 
@@ -366,7 +367,8 @@ IRCServer::initialize()
 			l++;
 		}
 		while(m < 100) {
-			rooms[k].userInfo[m] = (char*) malloc(sizeof(char) * 100);
+		
+		rooms[k].userInfo[m] = (char*) malloc(sizeof(char) * 100);
 			m++;
 		}
 		k++;
@@ -456,9 +458,9 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	file = fopen("password.txt","a");
 	//Rooms
 	while(i < 100) {
-		printf("\nuname value %s, userIn %s\n",uname(userpass[i]),user);
+		//printf("\nuname value %s, userIn %s\n",uname(userpass[i]),user);
 		if(strcmp(uname(userpass[i]),user) == 0) {
-			printf("\nuname value %s, userIn %s\n",uname(userpass[i]),user);
+		//	printf("\nuname value %s, userIn %s\n",uname(userpass[i]),user);
 			const char * m =  "DENIED\r\n";
 			write(fd, m, strlen(m));
 			return;
