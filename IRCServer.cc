@@ -460,6 +460,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	printf("\nnumber_users %d\n",number_users);
 	
 	while(i < number_users) {
+		printf("yol\n");
 		printf("%d uname %s username[i] %s\n",i,uname(userpass[i]));
 		i++;
 	}
