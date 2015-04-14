@@ -487,6 +487,7 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
 	int i = 0;
+	write(fd,"yolo1",5);
 	if(checkPassword(fd,user,password) == true) {
 
 		//Room created before, check
