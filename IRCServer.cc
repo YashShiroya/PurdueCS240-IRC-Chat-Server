@@ -467,6 +467,12 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 
 	userpass[number_users] = nyancat(user,password);
 	number_users++;
+	//Testing
+	int j = 0;
+	while(j < number_users) {
+		printf("Username %s\n",userpass[i]);
+		j++;
+	}
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
