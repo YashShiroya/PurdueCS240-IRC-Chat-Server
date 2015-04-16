@@ -570,6 +570,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 				check = 1;
 				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(nyancat(user,password));
 				rooms[i].number_users_room++;
+				write_client(fd,"ROOM ENTERED\r\n");
 				return;
 			}
 			i++;
