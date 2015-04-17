@@ -431,7 +431,9 @@ char * nyancat(const char * user, const char * password) {
 	strcat(s,user);
 	strcat(s,"^");
 	strcat(s,password);
-	return s;
+	char * m = (char *) malloc(sizeof(char) * 100);
+	m = strdup(s);
+	return m;
 }
 
 bool
