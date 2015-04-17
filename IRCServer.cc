@@ -605,6 +605,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 			while(l < rooms[i].number_users_room) {
 				if(strcmp(uname(rooms[i].users_in_room[l]),user) == 0) {
 					check2 = 1;
+					
 					break;
 				}
 				l++;
@@ -627,6 +628,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 			l++;
 
 		}
+		rooms[i].number_users_room--;
 	}
 	return;
 	}
