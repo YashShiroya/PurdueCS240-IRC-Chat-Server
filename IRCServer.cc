@@ -561,7 +561,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 } 
 //________________________________________________________________________________________________COULD CAUSE ERROR ON MALLOC____________________________________________________________________________
 void write_client(int fd, char * string) {
-        char * s = (char*)malloc(sizeof(char) * number_users * 100);
+        const char * s = (char*)malloc(sizeof(char) * number_users * 100);
 	s = strdup(string);
 	write(fd,s,strlen(s));
 	return;
