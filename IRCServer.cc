@@ -452,7 +452,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		i++;
 	}
 
-	char * msg = "PASSWORD INCORRECT";
+	char * msg = "PASSWORD INCORRECT\r\n";
 	write(fd,msg,strlen(msg));
 	return false;
 
@@ -559,9 +559,9 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 	return;
 
 } 
-
+//________________________________________________________________________________________________COULD CAUSE ERROR ON MALLOC____________________________________________________________________________
 void write_client(int fd, char * string) {
-	const char * s = (char*)malloc(sizeof(char) * 10000);
+	const char * s = (char*)malloc(sizeof(char) * number_users * 100);
 	s = strdup(string);
 	write(fd,s,strlen(s));
 	return;
@@ -597,6 +597,41 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 {
+	if(checkPassword(fd,user,password) == true) {
+	int i = 0; int check1 = 0; int l = 0; int check2 = 0;
+	while(i < number_rooms) {
+		if(strcmp(rooms[i].room_name,args) == 0) {
+			check1 = 1;
+			while(l < rooms[i].number_users_room) {
+				if(strcmp(uname(rooms[i].users_in_room[l]),user) == 0) {
+					check2 = 1;
+					break;
+				}
+				l++;
+			}
+		break;
+		}
+		i++;
+	}
+
+	if(check1 == 0) {
+		write_client(fd,"NO SUCH ROOM");
+	}
+	if(check2 == 0) {
+		write_client(fd,"NO SUCH USER IN ROOM");
+	}
+
+	if(check1 == 1 && check2 == 1) {
+		while(l < rooms[i].number_users_room - 1) {
+			rooms[i].users_in_room[l] = rooms[i].users_in_room[l + 1];
+			l++;
+
+		}
+	}
+	return;
+	}
+	return;
+
 }
 
 	void
