@@ -442,7 +442,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	int i = 0;
 
 	char * s = (char *) malloc(sizeof(char) * 100);
-	strcat(s,user);
+	strcpy(s,user);
 	strcat(s,"^");
 	strcat(s,password);
 
