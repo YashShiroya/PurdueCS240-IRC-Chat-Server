@@ -622,7 +622,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	}
 
 	if(check1 == 1 && check2 == 1) {
-		while(l < rooms[i].number_users_room) {
+		while(l < rooms[i].number_users_room - 1) {
 			rooms[i].users_in_room[l] = rooms[i].users_in_room[l + 1];
 			l++;
 
