@@ -440,9 +440,16 @@ bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password
 	int i = 0;
+
+	char * s = (char *) malloc(sizeof(char) * 100);
+	strcat(s,user);
+	strcat(s,"^");
+	strcat(s,password);
+
 	while(i < number_users) {
-		printf("userpass_checks %s Entered %s\n",userpass[i],nyancat(user,password));
-		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
+		printf("userpass_checks %s Entered %s\n",userpass[i],s);
+
+		if(strcmp(userpass[i],s) == 0) {
 			return true;
 		}
 		i++;
@@ -473,9 +480,9 @@ void IRCServer::addUser(int fd, const char * user, const char * password, const 
 	//Testing
 	int j = 0;
 	/*while(j < number_users) {
-		printf("Username %s\n",userpass[j]);
-		j++;
-	}*/
+	  printf("Username %s\n",userpass[j]);
+	  j++;
+	  }*/
 	fprintf(file,"%s^%s\n",user,password);	
 	fclose(file);
 	const char * msg =  "OK\r\n";
@@ -594,7 +601,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 {
 }
 
-	void
+void
 
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
@@ -644,12 +651,12 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 }	
 
 
-void
+	void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
 	if(checkPassword(fd,user,password)) {
 		char * temp = (char*)malloc(sizeof(char) * 200);
-		
+
 		for(int i = 0; i < number_users; i++) {
 			for(int j = i + 1; j < number_users - 1; j++) {
 				if(strcmp(uname(userpass[i]),uname(userpass[j])) > 0) {
@@ -661,7 +668,7 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 		}
 
 		char * print = (char*) malloc(sizeof(char) * 200 * number_users);
-		
+
 		int k = 0;
 		while(k < number_users) {
 			strcat(print,userpass[k]);
