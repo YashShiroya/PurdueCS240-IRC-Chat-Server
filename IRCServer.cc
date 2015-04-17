@@ -641,9 +641,32 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 	}
 }	
 
-	void
+
+void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
+	if(checkPassword(fd,user,password)) {
+		char * temp = (char*)malloc(sizeof(char) * 200);
+		
+		for(int i = 0; i < number_users; i++) {
+			for(int j = i + 1; j < number_users - 1; j++) {
+				if(strcmp(uname(userpass[i]),uname(userpass[j])) > 0) {
+					temp = userpass[i];
+					userpass[i] = userpass[j];
+					userpass[j] = temp;
+				}
+			}
+		}
 
+		char * print = (char*) malloc(sizeof(char) * 200 * number_users);
+		
+		int k = 0;
+		while(k < number_users) {
+			strcat(print,userpass[k]);
+			strcat(print,"\n");
+			k++;
+		} 
+		write_client(fd,print);
+	}
 }
 
