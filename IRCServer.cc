@@ -428,7 +428,7 @@ IRCServer::initialize()
 
 char * nyancat(const char * user, const char * password) {
 	char * s = (char *) malloc(sizeof(char) * 100);
-	strcat(s,user);
+	strcpy(s,user);
 	strcat(s,"^");
 	strcat(s,password);
 	char * m = (char *) malloc(sizeof(char) * 100);
@@ -442,14 +442,11 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	int i = 0;
 
 	char * s = (char *) malloc(sizeof(char) * 100);
-	strcpy(s,user);
-	strcat(s,"^");
-	strcat(s,password);
 
 	while(i < number_users) {
-		printf("userpass_checks %s Entered %s\n",userpass[i],s);
+		printf("userpass_checks %s Entered %s\n",userpass[i],nyancat(user,password));
 
-		if(strcmp(userpass[i],s) == 0) {
+		if(strcmp(userpass[i],nyancat(user,password)) == 0) {
 			return true;
 		}
 		i++;
@@ -544,8 +541,14 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 
 
 	if(checkPassword(fd,user,password) == true) {
+		
 		while(i < number_rooms) {
-			strcat(s,rooms[i].room_name);
+			if(i == 0) {
+				strcpy(s,rooms[i].room_name);
+			}
+			else {
+				strcat(s,rooms[i].room_name);
+			}
 			strcat(s,"\r\n");
 			printf("room name %s\n",rooms[i].room_name);
 			i++;
@@ -633,7 +636,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 			char * users_in_r = (char*)malloc(sizeof(char) * 10000);
 			char * heading = (char*)malloc(sizeof(char) * 50);
 			sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
-			strcat(users_in_r,heading);
+			strcpy(users_in_r,heading);
 
 			if(rooms[i].number_users_room == 0) {
 				write_client(fd,"NO USERS IN THIS ROOM\r\n");
@@ -671,8 +674,13 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 
 		int k = 0;
 		while(k < number_users) {
-			strcat(print,userpass[k]);
-			strcat(print,"\n");
+			if(k == 0) {
+				strcpy(print,userpass[k]);
+			}
+			else {
+				strcat(print,userpass[k]);
+			}
+			strcat(print,"\r\n");
 			k++;
 		} 
 		write_client(fd,print);
