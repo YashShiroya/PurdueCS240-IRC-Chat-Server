@@ -639,6 +639,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
+	//messages[msg_num] = strdup(args)	
 }
 
 void
