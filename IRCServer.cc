@@ -619,6 +619,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			int i = 0;
 			int check = 0;
 			if(strcmp(s,"") == 0) {
+				write_client(fd,"ENTER MESSAGE\r\n");				
 				return;
 			}		
 			while(i < number_rooms) {
