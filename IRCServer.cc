@@ -559,7 +559,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 				write_client(fd,"OK\r\n");
 				return;
 		}
-	rooms[i].number_users_room++;
+	
 		if(check == 0) {
 			write_client(fd,"DENIED\r\n");
 		}
@@ -720,7 +720,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 
 			char * temp = (char*)malloc(sizeof(char) * 200);
 
-		for(int p = 0; i < number_users - 1; i++) {
+		for(int p = 0; i < rooms[i].number_users_room - 1; i++) {
 			for(int q = p + 1; j < number_users; j++) {
 				if(strcmp(uname(rooms[i].users_in_room[p]),uname(rooms[i].users_in_room[q])) > 0) {
 					temp = rooms[i].users_in_room[p];
