@@ -744,7 +744,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 				strcat(users_in_r,"\r\n");
 				j++;	
 			}
-
+			strcat(users_in_r,"\r\n");
 			write_client(fd,users_in_r);
 		}
 	}
