@@ -700,9 +700,9 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
 		
-		strcpy(messages_list,"a");
+		strcpy(messages_list,"");
 		
-		for(int j = 0 ; j < rooms[i].msg_num; j++) {
+		for(int j = x ; j < rooms[i].msg_num; j++) {
 		
 			strcat(messages_list,rooms[i].messages[j]);
 			strcat(messages_list,"\r\n");
