@@ -645,7 +645,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				return;
 			}
 
-			if(rooms[i].msg_num == 5) {
+			if(rooms[i].msg_num == 100) {
 			
 				int j = 0;
 				while(j < rooms[i].msg_num - 1) {
