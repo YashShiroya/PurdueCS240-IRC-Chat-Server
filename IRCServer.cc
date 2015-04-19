@@ -694,19 +694,21 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		}
 		int x = atoi(token);
 		if(check == 0) {write_client(fd,"NO SUCH ROOM2\r\n");}
+		
 		char * str = (char *) malloc(sizeof(char) * 100);
 		sprintf(str,"msg_num %d\n",rooms[i].msg_num);
+		
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
 		
 		strcpy(messages_list,"a");
 		
-		for(int j = rooms[i].msg_num - x ; j < rooms[i].msg_num; j++) {
+		for(int j = 0 ; j < rooms[i].msg_num; j++) {
 		
 			strcat(messages_list,rooms[i].messages[j]);
 			strcat(messages_list,"\r\n");
 		}	
 	
-		write_client(fd,str);
+		write_client(fd,messages_list);
 
 	}
 }
