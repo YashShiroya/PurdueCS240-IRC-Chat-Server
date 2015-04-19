@@ -737,10 +737,10 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 				write_client(fd,"ERROR (User not in room)\r\n");				
 				return;
 			}		
-
+			
 		int x = atoi(token);
 		if(check == 0) {write_client(fd,"NO SUCH ROOM2\r\n");}
-		
+		if(x >= rooms[i].msg_num) {write_client(fd,"NO-NEW-MESSAGES\r\n");}
 		char * str = (char *) malloc(sizeof(char) * 100);
 		sprintf(str,"msg_num %d\n",rooms[i].msg_num);
 		
