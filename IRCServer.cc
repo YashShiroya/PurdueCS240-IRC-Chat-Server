@@ -723,7 +723,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			sprintf(st,"num room users %d\n", rooms[i].number_users_room);
 			//write_client(fd,st);
 			if(check2 == 0) {
-				write_client(fd,"ERROR (user not in room)\r\n");				
+				write_client(fd,"ERROR (User not in room)\r\n");				
 				return;
 			}		
 
