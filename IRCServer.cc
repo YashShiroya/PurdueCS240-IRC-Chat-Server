@@ -571,7 +571,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		}
 	
 		if(check == 0) {
-			write_client(fd,"DENIED\r\n");
+			write_client(fd,"ERROR (no room)\r\n");
 		}
 	}
 }
@@ -799,9 +799,9 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 			//sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
 			strcpy(users_in_r,"");
 
-			if(rooms[i].number_users_room == 0) {
+			/*if(rooms[i].number_users_room == 0) {
 				write_client(fd,"DENIED2\r\n");
-			}
+			}*/
 
 			while(j < rooms[i].number_users_room) {
 				strcat(users_in_r,uname(rooms[i].users_in_room[j]));
