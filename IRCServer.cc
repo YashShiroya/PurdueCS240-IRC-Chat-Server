@@ -647,7 +647,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			char * st = (char *) malloc(sizeof(char) * 100);
 			sprintf(st,"num room users %d\n", rooms[i].number_users_room);
 			//write_client(fd,st);
-			if(check2 == 0 && strcmp(s,"") == 0) {
+			if(check2 == 0) {
 				write_client(fd,"ERROR (user not in room)\r\n");				
 				return;
 			}
@@ -722,7 +722,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			char * st = (char *) malloc(sizeof(char) * 100);
 			sprintf(st,"num room users %d\n", rooms[i].number_users_room);
 			//write_client(fd,st);
-			if(check2 == 0 && strcmp(s,"") == 0) {
+			if(check2 == 0) {
 				write_client(fd,"ERROR (user not in room)\r\n");				
 				return;
 			}		
