@@ -537,11 +537,12 @@ void write_client(int fd, char * string) {
 	void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {	
-	if(number_rooms == 0) {
+	if(checkPassword(fd,user,password) == true) {
+		if(number_rooms == 0) {
 		write_client(fd,"NO ROOMS CREATED YET\r\n");
 		return;
-	}
-
+		}
+		
 	int check = 0; int i = 0;
 	if(checkPassword(fd,user,password) == true) {
 		while(i < number_rooms) {
@@ -552,6 +553,15 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 			i++;
 		}
 		if(check == 1) {
+				int g = 0;
+				while(g < rooms[i].number_users_room) {
+					if(strcmp(uname(rooms[i].users_in_room[g]), user) == 0) {
+						write_client(fd,"OK\r\n");
+						return;
+					}
+					g++;			
+				}				
+									
 				char * s = (char*) malloc(sizeof(char) * 200);
 				strcpy(s,nyancat(user,password));		
 				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(s);
@@ -564,6 +574,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 			write_client(fd,"DENIED\r\n");
 		}
 	}
+}
 	return;
 }
 	void
