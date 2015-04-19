@@ -479,7 +479,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		printf("Entered room creation, Total Rooms %d\n",number_rooms);
 		if(number_rooms < 100) {
 			rooms[number_rooms].room_name = strdup(args); 									
-			const char * s = "OK, ROOM CREATED\r\n";
+			const char * s = "OK\r\n";
 			printf(">>>>>Server Message>>>>>>\n");
 			write(fd,s,strlen(s));
 			printf("Room Name %s, Room Number %d\n",rooms[number_rooms].room_name,number_rooms);
@@ -735,9 +735,9 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 			//sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
 			strcpy(users_in_r,"");
 
-			/*if(rooms[i].number_users_room == 0) {
-				write_client(fd,"DENIED\r\n");
-			}*/
+			if(rooms[i].number_users_room == 0) {
+				write_client(fd,"DENIED2\r\n");
+			}
 
 			while(j < rooms[i].number_users_room) {
 				strcat(users_in_r,uname(rooms[i].users_in_room[j]));
