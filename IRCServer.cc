@@ -643,7 +643,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				}
 						
 				rooms[i].messages[rooms[i].msg_num - 1] = strdup(s);
-				rooms[i].msg_num++;
+				//rooms[i].msg_num++;______________________________________________________________________ISSUE?
 				write_client(fd,"MESSAGE SENT!\r\n");
 			}
 			else {
