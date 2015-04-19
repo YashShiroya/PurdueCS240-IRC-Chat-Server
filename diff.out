@@ -1,0 +1,9 @@
+48c48
+< OK
+---
+> ERROR (user not in room)
+53,54c53
+< 0 spiderman 
+< 
+---
+> ERROR (User not in room)
