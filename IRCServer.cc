@@ -555,11 +555,11 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 				char * s = (char*) malloc(sizeof(char) * 200);
 				strcpy(s,nyancat(user,password));		
 				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(s);
-				rooms[i].number_users_room = rooms[i].number_users_room + 1;
+				rooms[i].number_users_room++;
 				write_client(fd,"OK\r\n");
 				return;
 		}
-
+	rooms[i].number_users_room++;
 		if(check == 0) {
 			write_client(fd,"DENIED\r\n");
 		}
