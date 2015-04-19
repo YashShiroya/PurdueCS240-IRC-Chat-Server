@@ -616,12 +616,13 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 	if(checkPassword(fd,user,password) == true) {	
 		
 			char * token = (char *) malloc(sizeof(char) * 100);
+			char * s = (char *) malloc(sizeof(char) * 100);
 			char args_cpy[100] = "";
 			
 			strcpy(args_cpy,args);
 			token = strtok(args_cpy," ");
 		
-			char * s = strdup(args);
+			s = strdup(args);
 			s += strlen(token) + 1;
 		
 			int i = 0;
@@ -636,7 +637,9 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			}
 			
 			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n"); return;}
-			
+			char * s_prefix = (char*) malloc(sizeof(char) * 2000);
+			sprintf(s_prefix,"%d %s ",rooms[i].msg_num, user);
+			strcat(s_prefix,s);
 			if(strcmp(s,"") == 0) {
 				write_client(fd,"ENTER MESSAGE\r\n");				
 				return;
@@ -650,12 +653,12 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 					j++;
 				}
 						
-				rooms[i].messages[rooms[i].msg_num - 1] = strdup(s);
+				rooms[i].messages[rooms[i].msg_num - 1] = strdup(s_prefix);
 				//rooms[i].msg_num++;______________________________________________________________________ISSUE?
 				write_client(fd,"MESSAGE SENT!\r\n");
 			}
 			else {
-				rooms[i].messages[rooms[i].msg_num] = strdup(s);
+				rooms[i].messages[rooms[i].msg_num] = strdup(s_prefix);
 				rooms[i].msg_num++;	
 				write_client(fd,"MESSAGE SENT!\r\n");
 			}
@@ -668,25 +671,36 @@ void
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
 	if(checkPassword(fd,user,password) == true) {	
-	
-		write_client(fd,"~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~\r\n");		
+		
+			char * token = (char *) malloc(sizeof(char) * 100);
+			char * s = (char *) malloc(sizeof(char) * 100);
+			char args_cpy[100] = "";
+			
+			strcpy(args_cpy,args);
+			token = strtok(args_cpy," ");
+		
+			s = strdup(args);
+			s += strlen(token) + 1;
+		
+		//write_client(fd,"~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~\r\n");		
 		int i = 0; int check = 0;
 		printf("ABOVE ROOM CHECKS\n");		
 		while(i < number_rooms) {
-			if(strcmp(rooms[i].room_name,args) == 0) {
+			if(strcmp(rooms[i].room_name,s) == 0) {
 				check  = 1;			
 				break;
 			}		
 			i++;	
 		}
-		
+		int x = atoi(token);
 		if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
-		printf("ROOMS CHECKED\n");
+		
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
-		printf("Blw msg_list, abv strcpy\n");
+		
 		strcpy(messages_list,"");
-		printf("Abv for loop, blw strcpy\n");
-		for(int j = 0; j < rooms[i].msg_num; j++) {
+		
+		for(int j = rooms[i].msg_num - x ; j < rooms[i].msg_num; j++) {
+		
 			strcat(messages_list,rooms[i].messages[j]);
 			strcat(messages_list,"\r\n");
 		}	
