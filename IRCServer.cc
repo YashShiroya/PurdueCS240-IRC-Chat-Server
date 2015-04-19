@@ -47,7 +47,7 @@ int number_users = 0;
 struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * users_in_room[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
-	char * messages[5]; // = (char*)malloc(sizeof(char) * 1000);
+	char * messages[100]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
 	int number_users_room = 0;
 };
@@ -365,7 +365,7 @@ IRCServer::initialize()
 			rooms[k].users_in_room[l] = (char*) malloc(sizeof(char) * 100);
 			l++;
 		}
-		while(m < 5) {
+		while(m < 100) {
 
 			rooms[k].messages[m] = (char*) malloc(sizeof(char) * 100);
 			m++;
