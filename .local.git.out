@@ -1079,3 +1079,6 @@ After doing this, you may fix the identity used for this commit with:
  delete mode 100644 prog.out
  delete mode 100644 talk-server.out
  delete mode 100644 total.out
+[master 7747b13] Make IRCServer
+ 4 files changed, 14 insertions(+), 17 deletions(-)
+ rewrite total.txt (63%)

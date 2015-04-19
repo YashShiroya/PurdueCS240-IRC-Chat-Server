@@ -765,10 +765,10 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 		int k = 0;
 		while(k < number_users) {
 			if(k == 0) {
-				strcpy(print,userpass[k]);
+				strcpy(print,uname(userpass[k]));
 			}
 			else {
-				strcat(print,userpass[k]);
+				strcat(print,uname(userpass[k]));
 			}
 			strcat(print,"\r\n");
 			k++;
