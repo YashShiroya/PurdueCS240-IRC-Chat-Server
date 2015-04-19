@@ -1,0 +1,15 @@
+56c56
+< MESSAGE SENT!
+---
+> OK
+60c60
+< MESSAGE SENT!
+---
+> OK
+65,66c65,67
+< ~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~
+< NO SUCH ROOM
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
+> 
