@@ -776,6 +776,7 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 			k++;
 		} 
 		write_client(fd,print);
+		printf("\r\n");
 	}
 }
 
