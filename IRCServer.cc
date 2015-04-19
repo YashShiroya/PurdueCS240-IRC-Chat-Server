@@ -571,7 +571,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		}
 	
 		if(check == 0) {
-			write_client(fd,"ERROR (no room)\r\n");
+			write_client(fd,"ERROR (No room)\r\n");
 		}
 	}
 }
