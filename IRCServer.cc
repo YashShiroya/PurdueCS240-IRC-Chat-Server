@@ -480,8 +480,8 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 			const char * s = "OK, ROOM CREATED\r\n";
 			printf(">>>>>Server Message>>>>>>\n");
 			write(fd,s,strlen(s));
-			number_rooms++;
 			printf("Room Name %s, Room Number %d\n",rooms[number_rooms].room_name,number_rooms);
+			number_rooms++;			
 			return;
 		}
 	}
@@ -604,8 +604,9 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-	if(checkPassword(fd,user,password) == true) {	
 	
+	if(checkPassword(fd,user,password) == true) {	
+		
 			char * token = (char *) malloc(sizeof(char) * 100);
 			char args_cpy[100] = "";
 			
@@ -617,7 +618,9 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 		
 			int i = 0;
 			int check = 0;
-		
+			if(strcmp(s,"") == 0) {
+				return;
+			}		
 			while(i < number_rooms) {
 				if(strcmp(rooms[i].room_name,token) == 0) {
 					check  = 1;			
@@ -626,7 +629,8 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				i++;	
 			}
 			
-			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n"); return;}
+
 			if(rooms[i].msg_num == 5) {
 			
 				int j = 0;
