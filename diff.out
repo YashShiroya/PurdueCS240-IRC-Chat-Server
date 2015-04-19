@@ -1,0 +1,10 @@
+48,49c48
+< check2 1
+< OK
+---
+> ERROR (user not in room)
+54,55c53
+< 0 spiderman 
+< 
+---
+> ERROR (User not in room)
