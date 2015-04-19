@@ -601,6 +601,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 
 		}
 		rooms[i].number_users_room--;
+		write_client(fd,"OK\r\n");
 	}
 	return;
 	}
