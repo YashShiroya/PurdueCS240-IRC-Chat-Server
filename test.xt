@@ -1,0 +1,6 @@
+rm -f *.out
+rm -f *.o HashTableVoidTest IRCServer
+g++ -g -o HashTableVoidTest HashTableVoidTest.cc HashTableVoid.cc
+g++ -g -o IRCServer IRCServer.cc
+git add -A  >> .local.git.out
+git commit -a -m "Make IRCServer" >> .local.git.out
