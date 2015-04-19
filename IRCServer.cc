@@ -391,41 +391,6 @@ IRCServer::initialize()
 }
 
 
-
-/*struct s_users {
-  char * s_username;
-  char * s_password;
-  } 
-
-  typedef struct s_users s_users;*/
-
-//s_users users[1000];
-
-
-
-/*void IRCServer::init_s_users(s_users user_array[10]) {
-  int i = 0;
-  while(i < 10) {
-  user_array[i].s_username = "default";
-  user_array[i].s_password = "default";
-  i++;
-  }
-
-  }*/
-
-/*int IRCServer::find_s_users( s_users user_array[10],const char * user) {
-  int i = 0;
-  while(i < 10) {		
-  printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
-  if(strcmp(user_array[i].s_username,user) == 0) {
-  printf("strcmp %d\n",strcmp(user_array[i].s_username,user));
-  return 1;
-  }
-  i++;
-  }
-  return -1;
-  }*/
-
 char * nyancat(const char * user, const char * password) {
 	char * s = (char *) malloc(sizeof(char) * 100);
 	strcpy(s,user);
@@ -639,16 +604,69 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-	/*messages[msg_num] = strdup(args);
-	msg_num++;
+	char * token = (char *) malloc(sizeof(char) * 100);
+	char args_cpy[100] = "";
+	
+	strcpy(args_cpy,args);
+	token = strtok(args_cpy," ");
 
-	if()*/
+	char * s = strdup(args);
+	s += strlen(token) + 1;
+
+	int i = 0;
+	int check = 0;
+
+	while(i < number_rooms) {
+		if(strcmp(rooms[i].room_name,token) == 0) {
+			check  = 1;			
+			break;
+		}		
+		i++;	
+	}
+	
+	if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+	if(rooms[i].msg_num == 100) {
+	
+		int j = 0;
+		while(j < rooms[i].msg_num - 1) {
+			rooms[i].messages[j] = rooms[i].messages[j + 1];
+			j++;
+		}
+				
+		rooms[i].messages[rooms[i].msg_num - 1] = strdup(s);
+		rooms[i].msg_num++;
+	}
+	else {
+		rooms[i].messages[rooms[i].msg_num] = strdup(s);
+		rooms[i].msg_num++;	
+	}
+
 }
 
 void
 
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
+	int i = 0; int check = 0;
+	while(i < number_rooms) {
+		if(strcmp(rooms[i].room_name,args) == 0) {
+			check  = 1;			
+			break;
+		}		
+		i++;	
+	}
+	
+	if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+	
+	char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
+	strcpy(messages_list,"");
+	
+	for(int j = 0; j < rooms[i].msg_num; j++) {
+		strcat(messages_list,rooms[i].messages[j]);
+		strcat(messages_list,"\r\n");
+	}
+
+	write_client(fd,messages_list);
 }
 
 	void
