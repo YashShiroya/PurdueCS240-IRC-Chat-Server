@@ -1041,3 +1041,5 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+)
 [master 7f7f8a4] Make IRCServer
  3 files changed, 9 insertions(+), 5 deletions(-)
+[master 366619a] Make IRCServer
+ 3 files changed, 3 insertions(+), 1 deletion(-)
