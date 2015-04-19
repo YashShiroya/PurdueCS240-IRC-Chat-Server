@@ -348,7 +348,7 @@ char * IRCServer::nextword(FILE * fd){
 IRCServer::initialize()
 {	
 	char * string = (char*)malloc(100 * sizeof(char));
-	file = fopen(PASSWORD_FILE,"r");
+	file = fopen("mypasswords.txt","r");
 	int j = 0;
 
 	//Initialize userpass
@@ -426,7 +426,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	int i = 0;
-	file = fopen(PASSWORD_FILE,"a");
+	file = fopen("mypasswords.txt","a");
 	//Rooms
 	while(i < number_users) {
 		if(strcmp(uname(userpass[i]),user) == 0) {
