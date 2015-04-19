@@ -1246,3 +1246,11 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100644 total.out
 [master 2eb7232] Make IRCServer
  3 files changed, 9 insertions(+), 2 deletions(-)
+[master c80abbb] Make IRCServer
+ 7 files changed, 3 insertions(+), 87 deletions(-)
+ delete mode 100644 diff.out
+ create mode 100644 mypasswords.txt
+ delete mode 100644 prog.org.out
+ delete mode 100644 prog.out
+ delete mode 100644 talk-server.out
+ delete mode 100644 total.out
