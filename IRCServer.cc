@@ -47,7 +47,7 @@ int number_users = 0;
 struct Room {
 	const char * room_name = (char *) malloc(sizeof(char) * 100);
 	char * users_in_room[100]; // = (char*)malloc(sizeof(char) * 100); //uses userpass
-	char * messages[100]; // = (char*)malloc(sizeof(char) * 1000);
+	char * messages[5]; // = (char*)malloc(sizeof(char) * 1000);
 	int msg_num = 0;
 	int number_users_room = 0;
 };
@@ -604,41 +604,46 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-	char * token = (char *) malloc(sizeof(char) * 100);
-	char args_cpy[100] = "";
+	if(checkPassword(fd,user,password) == true) {	
 	
-	strcpy(args_cpy,args);
-	token = strtok(args_cpy," ");
-
-	char * s = strdup(args);
-	s += strlen(token) + 1;
-
-	int i = 0;
-	int check = 0;
-
-	while(i < number_rooms) {
-		if(strcmp(rooms[i].room_name,token) == 0) {
-			check  = 1;			
-			break;
-		}		
-		i++;	
-	}
-	
-	if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
-	if(rooms[i].msg_num == 100) {
-	
-		int j = 0;
-		while(j < rooms[i].msg_num - 1) {
-			rooms[i].messages[j] = rooms[i].messages[j + 1];
-			j++;
-		}
-				
-		rooms[i].messages[rooms[i].msg_num - 1] = strdup(s);
-		rooms[i].msg_num++;
-	}
-	else {
-		rooms[i].messages[rooms[i].msg_num] = strdup(s);
-		rooms[i].msg_num++;	
+			char * token = (char *) malloc(sizeof(char) * 100);
+			char args_cpy[100] = "";
+			
+			strcpy(args_cpy,args);
+			token = strtok(args_cpy," ");
+		
+			char * s = strdup(args);
+			s += strlen(token) + 1;
+		
+			int i = 0;
+			int check = 0;
+		
+			while(i < number_rooms) {
+				if(strcmp(rooms[i].room_name,token) == 0) {
+					check  = 1;			
+					break;
+				}		
+				i++;	
+			}
+			
+			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+			if(rooms[i].msg_num == 5) {
+			
+				int j = 0;
+				while(j < rooms[i].msg_num - 1) {
+					rooms[i].messages[j] = rooms[i].messages[j + 1];
+					j++;
+				}
+						
+				rooms[i].messages[rooms[i].msg_num - 1] = strdup(s);
+				rooms[i].msg_num++;
+				write_client(fd,"MESSAGE SENT!\r\n");
+			}
+			else {
+				rooms[i].messages[rooms[i].msg_num] = strdup(s);
+				rooms[i].msg_num++;	
+				write_client(fd,"MESSAGE SENT!\r\n");
+			}
 	}
 
 }
@@ -647,26 +652,31 @@ void
 
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
-	int i = 0; int check = 0;
-	while(i < number_rooms) {
-		if(strcmp(rooms[i].room_name,args) == 0) {
-			check  = 1;			
-			break;
-		}		
-		i++;	
-	}
+	if(checkPassword(fd,user,password) == true) {	
 	
-	if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+		write_client(fd,"~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~\r\n");		
+		int i = 0; int check = 0;
+		while(i < number_rooms) {
+			if(strcmp(rooms[i].room_name,args) == 0) {
+				check  = 1;			
+				break;
+			}		
+			i++;	
+		}
+		
+		if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
+		
+		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
+		strcpy(messages_list,"");
 	
-	char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
-	strcpy(messages_list,"");
+		for(int j = 0; j < rooms[i].msg_num; j++) {
+			strcat(messages_list,rooms[i].messages[j]);
+			strcat(messages_list,"\r\n");
+		}	
 	
-	for(int j = 0; j < rooms[i].msg_num; j++) {
-		strcat(messages_list,rooms[i].messages[j]);
-		strcat(messages_list,"\r\n");
-	}
+		write_client(fd,messages_list);
 
-	write_client(fd,messages_list);
+	}
 }
 
 	void
