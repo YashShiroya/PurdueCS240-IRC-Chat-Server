@@ -365,7 +365,7 @@ IRCServer::initialize()
 			rooms[k].users_in_room[l] = (char*) malloc(sizeof(char) * 100);
 			l++;
 		}
-		while(m < 5) {
+		while(m < 100) {
 
 			rooms[k].messages[m] = (char*) malloc(sizeof(char) * 100);
 			m++;
