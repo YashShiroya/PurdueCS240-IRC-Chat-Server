@@ -365,7 +365,7 @@ IRCServer::initialize()
 			rooms[k].users_in_room[l] = (char*) malloc(sizeof(char) * 100);
 			l++;
 		}
-		while(m < 100) {
+		while(m < 5) {
 
 			rooms[k].messages[m] = (char*) malloc(sizeof(char) * 100);
 			m++;
@@ -618,10 +618,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 		
 			int i = 0;
 			int check = 0;
-			if(strcmp(s,"") == 0) {
-				write_client(fd,"ENTER MESSAGE\r\n");				
-				return;
-			}		
+					
 			while(i < number_rooms) {
 				if(strcmp(rooms[i].room_name,token) == 0) {
 					check  = 1;			
@@ -631,6 +628,11 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			}
 			
 			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n"); return;}
+			
+			if(strcmp(s,"") == 0) {
+				write_client(fd,"ENTER MESSAGE\r\n");				
+				return;
+			}
 
 			if(rooms[i].msg_num == 5) {
 			
