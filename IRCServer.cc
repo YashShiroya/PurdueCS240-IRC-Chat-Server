@@ -707,7 +707,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			strcat(messages_list,rooms[i].messages[j]);
 			strcat(messages_list,"\r\n");
 		}	
-	
+		strcat(messages_list,"\r\n");
 		write_client(fd,messages_list);
 
 	}
