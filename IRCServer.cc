@@ -663,6 +663,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 	
 		write_client(fd,"~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~\r\n");		
 		int i = 0; int check = 0;
+		printf("ABOVE ROOM CHECKS\n");		
 		while(i < number_rooms) {
 			if(strcmp(rooms[i].room_name,args) == 0) {
 				check  = 1;			
@@ -672,10 +673,11 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		}
 		
 		if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
-		
+		printf("ROOMS CHECKED\n");
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
+		printf("Blw msg_list, abv strcpy\n");
 		strcpy(messages_list,"");
-	
+		printf("Abv for loop, blw strcpy\n");
 		for(int j = 0; j < rooms[i].msg_num; j++) {
 			strcat(messages_list,rooms[i].messages[j]);
 			strcat(messages_list,"\r\n");
