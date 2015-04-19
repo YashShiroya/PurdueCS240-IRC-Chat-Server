@@ -4,5 +4,4 @@
 ./HashTableVoidTest test4           : 2   of 2  
 ./HashTableVoidTest test5           : 2   of 2  
 ./HashTableVoidTest test6           : 2   of 2  
-./test-server1.sh ./IRCServer 3090   : 5   of 5  
-./test-server2.sh ./IRCServer 3090   : 5   of 5  
+./test-server3.sh ./IRCServer 3090   : 5   of 5  
