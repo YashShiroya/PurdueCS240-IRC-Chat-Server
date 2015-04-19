@@ -635,12 +635,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				}		
 				i++;	
 			}
-			
-			if(check == 0) {write_client(fd,"NO SUCH ROOM1\r\n"); return;}
-			char * s_prefix = (char*) malloc(sizeof(char) * 2000);
-			sprintf(s_prefix,"%d %s ",rooms[i].msg_num, user);
-			strcat(s_prefix,s);
-			
+
 			int g = 0; int check2 = 0;	
 			while(g < rooms[i].number_users_room) {
 				if(strcmp(user,uname(rooms[i].users_in_room[g]))) {
@@ -656,7 +651,15 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			}
 			if(check2 == 0) {
 				write_client(fd,"ERROR (User not in room)\r\n");
+				return;
 			}
+			
+			if(check == 0) {write_client(fd,"NO SUCH ROOM1\r\n"); return;}
+			char * s_prefix = (char*) malloc(sizeof(char) * 2000);
+			sprintf(s_prefix,"%d %s ",rooms[i].msg_num, user);
+			strcat(s_prefix,s);
+			
+			
 
 			if(rooms[i].msg_num == 100) {
 			
