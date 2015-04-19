@@ -711,6 +711,18 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 
 		if(check == 1) {
 
+			char * temp = (char*)malloc(sizeof(char) * 200);
+
+		for(int p = 0; i < number_users; i++) {
+			for(int q = p + 1; j < number_users - 1; j++) {
+				if(strcmp(uname(rooms[i].users_in_room[p]),uname(rooms[i].users_in_room[q])) > 0) {
+					temp = rooms[i].users_in_room[p];
+					rooms[i].users_in_room[p] = rooms[i].users_in_room[q];
+					rooms[i].users_in_room[q] = temp;
+				}
+			}
+		}
+			
 			char * users_in_r = (char*)malloc(sizeof(char) * 10000);
 			char * heading = (char*)malloc(sizeof(char) * 50);
 			sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
