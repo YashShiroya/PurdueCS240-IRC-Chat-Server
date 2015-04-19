@@ -640,9 +640,22 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			char * s_prefix = (char*) malloc(sizeof(char) * 2000);
 			sprintf(s_prefix,"%d %s ",rooms[i].msg_num, user);
 			strcat(s_prefix,s);
-			if(strcmp(s,"") == 0) {
+			
+			int g = 0; int check2 = 0;	
+			while(g < rooms[i].number_users_room) {
+				if(strcmp(user,uname(rooms[i].users_in_room[g]))) {
+					check2 = 1;					
+					break;
+				}				
+				g++;
+			}
+
+			/*if(strcmp(s,"") == 0) {
 				write_client(fd,"ENTER MESSAGE\r\n");				
 				return;
+			}*/
+			if(check2 == 0) {
+				write_client(fd,"ERROR (User not in room)\r\n");
 			}
 
 			if(rooms[i].msg_num == 100) {
