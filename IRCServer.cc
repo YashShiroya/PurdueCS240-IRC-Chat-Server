@@ -684,7 +684,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		
 		//write_client(fd,"~~~~~~~~~~~~~~~~~``LIST OF MESSAGES``~~~~~~~~~~~~~~~~\r\n");		
 		int i = 0; int check = 0;
-		printf("ABOVE ROOM CHECKS\n");		
+				
 		while(i < number_rooms) {
 			if(strcmp(rooms[i].room_name,s) == 0) {
 				check  = 1;			
@@ -693,8 +693,9 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			i++;	
 		}
 		int x = atoi(token);
-		if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n");}
-		
+		if(check == 0) {write_client(fd,"NO SUCH ROOM2\r\n");}
+		char * str = (char *) malloc(sizeof(char) * 100);
+		sprintf(str,"msg_num %d\n",rooms[i].msg_num);
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
 		
 		strcpy(messages_list,"a");
@@ -705,7 +706,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			strcat(messages_list,"\r\n");
 		}	
 	
-		write_client(fd,messages_list);
+		write_client(fd,str);
 
 	}
 }
