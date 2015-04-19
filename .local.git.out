@@ -1051,3 +1051,17 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+), 1 deletion(-)
 [master bc27ab7] Make IRCServer
  3 files changed, 14 insertions(+)
+[master 6960d5c] Make IRCServer
+ 16 files changed, 655 insertions(+), 21 deletions(-)
+ create mode 100755 IRCServer.org
+ create mode 100755 TestIRCServer
+ create mode 100755 test-server1.sh
+ create mode 100755 test-server10.sh
+ create mode 100755 test-server2.sh
+ create mode 100755 test-server3.sh
+ create mode 100755 test-server4.sh
+ create mode 100755 test-server5.sh
+ create mode 100755 test-server6.sh
+ create mode 100755 test-server7.sh
+ create mode 100755 test-server8.sh
+ create mode 100755 test-server9.sh

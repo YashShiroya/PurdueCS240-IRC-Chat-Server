@@ -1,0 +1,62 @@
+Start Test 10
+Add Users
+ADD-USER superman clarkkent
+response:
+OK
+
+ADD-USER spiderman peterpark
+response:
+OK
+
+ADD-USER mary poppins
+response:
+OK
+
+Create Room
+CREATE-ROOM superman clarkkent java-programming
+response:
+OK, ROOM CREATED
+
+Create Room
+CREATE-ROOM spiderman peterpark c-programming
+response:
+OK, ROOM CREATED
+
+Enter room
+ENTER-ROOM superman clarkkent python-programming
+response:
+NO SUCH ROOM FOUND
+
+ENTER-ROOM aquaman xyz python-programming
+response:
+WRONG PASSWORD
+
+ENTER-ROOM spiderman peterpark c-programming
+response:
+ROOM ENTERED
+
+ENTER-ROOM aquaman xyz c-programming
+response:
+WRONG PASSWORD
+
+ENTER-ROOM mary poppins c-programming
+response:
+ROOM ENTERED
+
+Print users in room
+GET-USERS-IN-ROOM unknown clarkkent java-programming
+response:
+WRONG PASSWORD
+
+GET-USERS-IN-ROOM mary poppins java-programming
+response:
+
+Enter another user
+Print users in room
+Send message
+Send message
+Get messages
+Get messages
+Get messages from 0
+Get messages from 2
+Killing Server
