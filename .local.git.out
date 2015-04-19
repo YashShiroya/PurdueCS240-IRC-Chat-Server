@@ -1678,3 +1678,11 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100644 prog.out
  create mode 100644 talk-server.out
  create mode 100644 total.out
+[master 0de51ec] Make IRCServer
+ 8 files changed, 9 insertions(+), 142 deletions(-)
+ create mode 100644 .testall.swp
+ delete mode 100644 diff.out
+ delete mode 100644 prog.org.out
+ delete mode 100644 prog.out
+ delete mode 100644 talk-server.out
+ delete mode 100644 total.out
