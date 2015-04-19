@@ -547,16 +547,21 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		while(i < number_rooms) {
 			if(strcmp(rooms[i].room_name,args) == 0) {
 				check = 1;
-				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(nyancat(user,password));
-				rooms[i].number_users_room++;
-				write_client(fd,"ROOM ENTERED\r\n");
-				return;
+				break;
 			}
 			i++;
 		}
+		if(check == 1) {
+				char * s = (char*) malloc(sizeof(char) * 200);
+				strcpy(s,nyancat(user,password));		
+				rooms[i].users_in_room[rooms[i].number_users_room]  = strdup(s);
+				rooms[i].number_users_room++;
+				write_client(fd,"OK\r\n");
+				return;
+		}
 
 		if(check == 0) {
-			write_client(fd,"NO SUCH ROOM FOUND\r\n");
+			write_client(fd,"DENIED\r\n");
 		}
 	}
 	return;
@@ -695,9 +700,9 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 {
 	if(checkPassword(fd,user,password)) {
 
-		if(number_rooms == 0) {
+		/*if(number_rooms == 0) {
 			write_client(fd,"NO ROOMS CREATED YET\r\n");
-		}
+		}*/
 
 		int check = 0; int i = 0; int j = 0;
 		while(i < number_rooms) {
@@ -708,7 +713,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 			i++;
 		}
 		if(check == 0) {
-			write_client(fd,"NO SUCH ROOM CREATED\r\n");
+			write_client(fd,"DENIED\r\n");
 		}
 
 		if(check == 1) {
@@ -727,11 +732,11 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 			
 			char * users_in_r = (char*)malloc(sizeof(char) * 10000);
 			char * heading = (char*)malloc(sizeof(char) * 50);
-			sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
-			strcpy(users_in_r,heading);
+			//sprintf(heading,"USERS IN ROOM: %s\n", rooms[i].room_name);
+			strcpy(users_in_r,"");
 
 			if(rooms[i].number_users_room == 0) {
-				write_client(fd,"NO USERS IN THIS ROOM\r\n");
+				write_client(fd,"DENIED\r\n");
 			}
 
 			while(j < rooms[i].number_users_room) {
