@@ -417,7 +417,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		i++;
 	}
 
-	char * msg = "PASSWORD INCORRECT\r\n";
+	char * msg = "WRONG PASSWORD\r\n";
 	write(fd,msg,strlen(msg));
 	return false;
 
@@ -581,10 +581,10 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 	}
 
 	if(check1 == 0) {
-		write_client(fd,"NO SUCH ROOM");
+		write_client(fd,"ERROR (No such room)\r\n");
 	}
 	if(check2 == 0) {
-		write_client(fd,"NO SUCH USER IN ROOM");
+		write_client(fd,"ERROR (No user in room)\r\n");
 	}
 
 	if(check1 == 1 && check2 == 1) {
