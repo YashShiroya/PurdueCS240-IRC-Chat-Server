@@ -636,7 +636,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				i++;	
 			}
 			
-			if(check == 0) {write_client(fd,"NO SUCH ROOM\r\n"); return;}
+			if(check == 0) {write_client(fd,"NO SUCH ROOM1\r\n"); return;}
 			char * s_prefix = (char*) malloc(sizeof(char) * 2000);
 			sprintf(s_prefix,"%d %s ",rooms[i].msg_num, user);
 			strcat(s_prefix,s);
@@ -655,12 +655,12 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 						
 				rooms[i].messages[rooms[i].msg_num - 1] = strdup(s_prefix);
 				//rooms[i].msg_num++;______________________________________________________________________ISSUE?
-				write_client(fd,"MESSAGE SENT!\r\n");
+				write_client(fd,"OK\r\n");
 			}
 			else {
 				rooms[i].messages[rooms[i].msg_num] = strdup(s_prefix);
 				rooms[i].msg_num++;	
-				write_client(fd,"MESSAGE SENT!\r\n");
+				write_client(fd,"OK\r\n");
 			}
 	}
 
