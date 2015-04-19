@@ -715,8 +715,8 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 
 			char * temp = (char*)malloc(sizeof(char) * 200);
 
-		for(int p = 0; i < number_users; i++) {
-			for(int q = p + 1; j < number_users - 1; j++) {
+		for(int p = 0; i < number_users - 1; i++) {
+			for(int q = p + 1; j < number_users; j++) {
 				if(strcmp(uname(rooms[i].users_in_room[p]),uname(rooms[i].users_in_room[q])) > 0) {
 					temp = rooms[i].users_in_room[p];
 					rooms[i].users_in_room[p] = rooms[i].users_in_room[q];
@@ -752,8 +752,8 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 	if(checkPassword(fd,user,password)) {
 		char * temp = (char*)malloc(sizeof(char) * 200);
 
-		for(int i = 0; i < number_users; i++) {
-			for(int j = i + 1; j < number_users - 1; j++) {
+		for(int i = 0; i < number_users - 1; i++) {
+			for(int j = i + 1; j < number_users; j++) {
 				if(strcmp(uname(userpass[i]),uname(userpass[j])) > 0) {
 					temp = userpass[i];
 					userpass[i] = userpass[j];
