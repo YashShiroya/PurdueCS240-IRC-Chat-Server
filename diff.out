@@ -1,0 +1,35 @@
+5c5
+< DENIED
+---
+> OK
+9c9
+< DENIED
+---
+> OK
+13c13
+< DENIED
+---
+> OK
+17c17
+< DENIED
+---
+> OK
+22c22
+< OK, ROOM CREATED
+---
+> OK
+27c27
+< ROOM ENTERED
+---
+> OK
+31c31
+< ROOM ENTERED
+---
+> OK
+36,37c36,38
+< NO USERS IN THIS ROOM
+< USERS IN ROOM: 
+---
+> aquaman
+> superman
+> 
