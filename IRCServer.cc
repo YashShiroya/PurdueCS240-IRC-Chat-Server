@@ -638,15 +638,15 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 			
 			int g = 0; int check2 = 0;	
 			while(g < rooms[i].number_users_room) {
-				if(strcmp(user,uname(rooms[i].users_in_room[g]))) {
+				if(strcmp(user,uname(rooms[i].users_in_room[g])) == 0) {
 					check2 = 1;					
 					break;
 				}				
 				g++;
 			}
 			char * st = (char *) malloc(sizeof(char) * 100);
-			sprintf(st,"check2 %d\n", check2);
-			write_client(fd,st);
+			sprintf(st,"num room users %d\n", rooms[i].number_users_room);
+			//write_client(fd,st);
 			if(check2 == 0 && strcmp(s,"") == 0) {
 				write_client(fd,"ERROR (user not in room)\r\n");				
 				return;
