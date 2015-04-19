@@ -697,7 +697,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		
 		char * messages_list = (char*) malloc(sizeof(char) * rooms[i].msg_num * 200);
 		
-		strcpy(messages_list,"");
+		strcpy(messages_list,"a");
 		
 		for(int j = rooms[i].msg_num - x ; j < rooms[i].msg_num; j++) {
 		
@@ -705,7 +705,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 			strcat(messages_list,"\r\n");
 		}	
 	
-		write_client(fd,token);
+		write_client(fd,messages_list);
 
 	}
 }
