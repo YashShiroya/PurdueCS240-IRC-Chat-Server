@@ -720,8 +720,8 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 
 			char * temp = (char*)malloc(sizeof(char) * 200);
 
-		for(int p = 0; p < rooms[i].number_users_room - 1; i++) {
-			for(int q = p + 1; q < rooms[i].number_users_room; j++) {
+		for(int p = 0; p < rooms[i].number_users_room - 1; p++) {
+			for(int q = p + 1; q < rooms[i].number_users_room; q++) {
 				if(strcmp(uname(rooms[i].users_in_room[p]),uname(rooms[i].users_in_room[q])) > 0) {
 					temp = rooms[i].users_in_room[p];
 					rooms[i].users_in_room[p] = rooms[i].users_in_room[q];
