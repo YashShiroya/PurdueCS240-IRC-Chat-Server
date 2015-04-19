@@ -635,7 +635,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				}		
 				i++;	
 			}
-
+			
 			int g = 0; int check2 = 0;	
 			while(g < rooms[i].number_users_room) {
 				if(strcmp(user,uname(rooms[i].users_in_room[g]))) {
@@ -644,7 +644,9 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				}				
 				g++;
 			}
-
+			char * st = (char *) malloc(sizeof(char) * 100);
+			sprintf(st,"check2 %d\n", check2);
+			write_client(fd,st);
 			if(check2 == 0 && strcmp(s,"") == 0) {
 				write_client(fd,"ERROR (user not in room)\r\n");				
 				return;
