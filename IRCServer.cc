@@ -650,10 +650,10 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 				g++;
 			}
 
-			/*if(strcmp(s,"") == 0) {
-				write_client(fd,"ENTER MESSAGE\r\n");				
+			if(check2 == 0 && strcmp(s,"") == 0) {
+				write_client(fd,"ERROR (user not in room)\r\n");				
 				return;
-			}*/
+			}
 			if(check2 == 0) {
 				write_client(fd,"ERROR (User not in room)\r\n");
 			}
