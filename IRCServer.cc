@@ -417,7 +417,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		i++;
 	}
 
-	char * msg = "WRONG PASSWORD\r\n";
+	char * msg = "ERROR (Wrong password)\r\n";
 	write(fd,msg,strlen(msg));
 	return false;
 
