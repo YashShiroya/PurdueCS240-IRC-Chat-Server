@@ -520,7 +520,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password)
 			printf("room name %s\n",rooms[i].room_name);
 			i++;
 		}
-		write_client(fd,heading);
+		//write_client(fd,heading);
 		write_client(fd,s);
 	}
 	return;
