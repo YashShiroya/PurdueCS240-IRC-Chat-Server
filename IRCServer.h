@@ -30,6 +30,7 @@ class IRCServer {
 		char * nextword(FILE * fd);
 		void processRequest( int socket );
 		void addUser(int fd, const char * user, const char * password, const char * args);
+		void sign_in(int fd, const char * user, const char * password, const char * args);
 		void enterRoom(int fd, const char * user, const char * password, const char * args);
 		void leaveRoom(int fd, const char * user, const char * password, const char * args);
 		void sendMessage(int fd, const char * user, const char * password, const char * args);

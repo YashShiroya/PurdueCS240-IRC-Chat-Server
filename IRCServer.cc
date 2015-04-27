@@ -39,6 +39,7 @@ const char * usage =
 FILE * file;
 char * uname(char * userpass);
 void write_client(int fd, char * string);
+void sign_in(int fd, const char * user, const char * password, const char * args);
 int m = 100; int n = 100;
 int number_rooms = 0;
 char * userpass[100];
@@ -309,6 +310,9 @@ void IRCServer::processRequest( int fd )
 	else if (!strcmp(command, "LIST-ROOMS")) {
 		listRoom(fd,user,password);
 	}
+	else if (!strcmp(command, "SIGNIN-USER")) {
+		sign_in(fd,user,password,args);
+	}
 	else {
 		const char * msg =  "UNKNOWN COMMAND\r\n";
 		write(fd, msg, strlen(msg));
@@ -422,6 +426,18 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	return false;
 
 }
+
+void IRCServer::sign_in(int fd, const char * user, const char * password, const char * args) {
+	if(checkPassword(fd,user,password) == true) {
+			
+			write_client(fd,"OK\r\n");
+			
+	}
+	else {
+			write_client(fd,"Error (Wrong Username or Password)\r\n");
+	}
+}
+
 
 void IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
