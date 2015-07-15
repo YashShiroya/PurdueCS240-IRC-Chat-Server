@@ -78,25 +78,48 @@ bool HashTableVoid::find( const char * key, void ** data)
 bool HashTableVoid::removeElement(const char * key)
 {
 	/*int h = hash(key);
+	  HashTableVoidEntry * e = _buckets[h];
+	  HashTableVoidEntry * prev = NULL;
+	  while (e!=NULL) {
+	  if (!strcmp(e->_key, key)) {
+	// Entry found
+	if (prev != NULL) {
+	prev->_next = e->_next;
+	}
+	else {
+	_buckets[h] = e->_next;
+	}
+	free((char *)e->_key);
+	delete e;
+	return true;
+	}
+	prev = e;
+	e = e->_next;
+	}
+	return false;*/
+
+	int h = hash(key);
 	HashTableVoidEntry * e = _buckets[h];
 	HashTableVoidEntry * prev = NULL;
-	while (e!=NULL) {
-		if (!strcmp(e->_key, key)) {
-			// Entry found
-			if (prev != NULL) {
-				prev->_next = e->_next;
-			}
-			else {
-				_buckets[h] = e->_next;
-			}
-			free((char *)e->_key);
+
+	while(e != NULL) {
+		if(strcmp(e->_key, key) == 0) {
+
+		//	data = e->_data;
+
+			if(prev == NULL) _buckets[h] = e->_next;
+			else prev->_next = e->_next;
+
+
+
 			delete e;
 			return true;
 		}
 		prev = e;
 		e = e->_next;
 	}
-	return false;*/
+
+	return false;
 }
 
 // Creates an iterator object for this hash table
@@ -132,18 +155,18 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		//replace with else
 
 		if(_currentEntry == NULL) {
-			
+
 			_currentBucket++;
-			
+
 			while(_currentBucket < _hashTable->TableSize){
 				if(_hashTable->_buckets[_currentBucket] != NULL) break;
 				_currentBucket++;
 			}
-			
+
 			if(_currentBucket == _hashTable->TableSize) {return false;}
-			
+
 			_currentEntry = _hashTable->_buckets[_currentBucket];
-			
+
 			if(_currentEntry != NULL) {
 				key = _currentEntry->_key;
 				data = _currentEntry->_data;
@@ -154,8 +177,8 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 		}
 
 	}
-	
-		return false;
+
+	return false;
 
 }
 
