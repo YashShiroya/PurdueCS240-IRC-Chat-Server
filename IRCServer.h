@@ -20,12 +20,12 @@ class IRCServer {
 			char * s_password;
 		};*/
 
-		//struct s_users users[1000];
+		//strucstructt s_users users[1000];
 
 		void createRoom(int fd, const char * user, const char * password, const char * args);
 		void listRoom(int fd, const char * user, const char * password);
 		bool checkPassword(int fd, const char * user, const char * password);
-		//int find_s_users(struct s_users user_array[1000],const char * user);
+		//int find_s_users( s_users user_array[1000],const char * user);
 		void init_users(char * userpass[100]);
 		char * nextword(FILE * fd);
 		void processRequest( int socket );

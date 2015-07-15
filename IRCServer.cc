@@ -865,4 +865,3 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 
 	}
 }
-
