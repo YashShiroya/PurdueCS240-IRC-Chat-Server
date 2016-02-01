@@ -2113,3 +2113,6 @@ After doing this, you may fix the identity used for this commit with:
  rewrite HashTableVoidTest (83%)
 [master 113a077] Make IRCServer
  1 file changed, 4 insertions(+)
+[master 97df1dd] Make IRCServer
+ 4 files changed, 45 insertions(+), 20 deletions(-)
+ rewrite HashTableVoidTest (75%)
